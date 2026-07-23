@@ -1,4 +1,5 @@
 from flask import  Flask, render_template, request, redirect, url_for, abort
+from flask_migrate import Migrate
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from forms import SignupForm, PostForm, LoginForm
 from urllib.parse  import urlparse
@@ -13,6 +14,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 login_manager = LoginManager(app)
 login_manager.login_view="login"
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 from models import User, Post
 
