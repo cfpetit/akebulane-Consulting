@@ -19,11 +19,18 @@
             {% endfor %}
         </div>
         <div>
-            {{ form.title_slug.label }}
-            {{ form.title_slug(size=128) }}<br>
-            {% for error in form.title_slug.errors %}
-            <span style="color: red;">{{ error }}</span>
-            {% endfor %}
+            {{ form.summary.label }}
+            {{ form.summary(rows=4) }}
+        </div>
+
+        <div>
+            {{ form.category.label }}
+            {{ form.category() }}
+        </div>
+
+        <div>
+            {{ form.image.label }}
+            {{ form.image(size=80) }}
         </div>
         <div>
             {{ form.content.label }}
