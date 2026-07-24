@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, abort
 from flask_login import login_required, current_user
 
-from app.decorators import admin_required
+from app.auth.decorators import admin_required
 from app.models import Post
 from . import admin_bp
 from .forms import PostForm
@@ -12,9 +12,6 @@ from .forms import PostForm
 @login_required
 @admin_required
 def post_form(post_id):
-
-    if not current_user.is_admin:
-        abort(403)
 
     form = PostForm()
     if form.validate_on_submit():

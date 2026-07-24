@@ -1,11 +1,11 @@
 {% extends "base_template.html" %}
 
-{% block title %}Tutorial Flask: Miniblog{% endblock %}
+{% block title %}Akebulan Consulting{% endblock %}
 
 {% block content %}
     <ul>
     {% for post in posts %}
-        <li><a href="{{ post.public_url() }}">{{ post.title }}</a></li>
+        <li><a href="{{ url_for('public.show_post', slug=post.title_slug) }}">{{ post.title }}</a></li>
     {% endfor %}
     </ul>
 {% endblock %}

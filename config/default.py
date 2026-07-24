@@ -1,6 +1,7 @@
 # config/default.py
 
 from os.path import abspath, dirname
+import os
 
 
 # Define the application directory
@@ -18,3 +19,13 @@ APP_ENV_DEVELOPMENT = 'development'
 APP_ENV_STAGING = 'staging'
 APP_ENV_PRODUCTION = 'production'
 APP_ENV = ''
+
+#Configuración del Email
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 587
+MAIL_USERNAME = 'cfranciapetit@gmail.com'
+MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+DONT_REPLY_FROM_EMAIL = 'cfranciapetit@gmail.com'
+ADMINS = ('cfranciapetit@gmail.com', )
+MAIL_USE_TLS = True
+MAIL_DEBUG = False
