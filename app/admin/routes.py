@@ -3,16 +3,68 @@ from flask_login import login_required, current_user
 
 from app.auth.decorators import admin_required
 from app.models import Post
+from app.auth.models import User
 from . import admin_bp
-from .forms import PostForm
+from .forms import PostForm, UserAdminForm
+import logging
+import os
 
+logger = logging.getLogger(__name__)
 
-@admin_bp.route("/admin/post/", methods=['GET', 'POST'], defaults={'post_id': None})
-@admin_bp.route("/admin/post/<int:post_id>/", methods=['GET', 'POST'])
+@admin_bp.route("/admin/")
 @login_required
 @admin_required
-def post_form(post_id):
+def index():
+    return render_template("admin/index.html")
 
+@admin_bp.route("/admin/users")
+@login_required
+@admin_required
+def list_users():
+    users = User.get_all()
+    return render_template("admin/users.html", users=users)
+
+@admin_bp.route("/admin/user/<int:user_id>/", methods=['GET', 'POST'])
+@login_required
+@admin_required
+def update_user_form(user_id):
+    user = User.get_by_id(user_id)
+    if user is None:
+        logger.info(f'El usuario {user_id} no existe')
+        abort(404)
+    
+    form = UserAdminForm(obj=user)
+    if form.validate_on_submit():
+        user.is_admin = form.is_admin.data
+        user.save()
+        logger.info(f'Guardando el usuario {user_id}')
+        return redirect(url_for('admin.list_users'))
+    return render_template("admin/user_form.html", form=form, user=user)
+
+@admin_bp.route("/admin/user/delete/<int:user_id>/", methods=['POST', ])
+@login_required
+@admin_required
+def delete_user(user_id):
+    logger.info(f'Se va a eliminar al usuario {user_id}')
+    user = User.get_by_id(user_id)
+    if user is None:
+        logger.info(f'El usuario {user_id} no existe')
+        abort(404)
+    user.delete()
+    logger.info(f'El usuario {user_id} ha sido eliminado')
+    return redirect(url_for('admin.list_users'))
+
+@admin_bp.route("/admin/posts")
+@login_required
+@admin_required
+def list_posts():
+    posts = Post.get_all()
+    return render_template("admin/posts.html", posts=posts)
+
+@admin_bp.route("/admin/post/", methods=['GET', 'POST'])
+@login_required
+@admin_required
+def post_form():
     form = PostForm()
     if form.validate_on_submit():
         title = form.title.data
@@ -20,10 +72,43 @@ def post_form(post_id):
         category = form.category.data
         image = form.image.data
         content = form.content.data
-
-
         post = Post(user_id=current_user.id, title=title, content=content, summary=summary, category=category, image=image)
         post.save()
-
-        return redirect(url_for('public.index'))
+        return redirect(url_for('admin.list_posts'))
     return render_template("admin/post_form.html", form=form)
+
+@admin_bp.route("/admin/post/<int:post_id>/", methods=['GET', 'POST'])
+@login_required
+@admin_required
+def update_post_form(post_id):
+    """Actualiza un post existente"""
+    post = Post.get_by_id(post_id)
+    if post is None:
+        logger.info(f'El post {post_id} no existe')
+        abort(404)
+    # Crea un formulario inicializando los campos con
+    # los valores del post.
+    form = PostForm(obj=post)
+    if form.validate_on_submit():
+        # Actualiza los campos del post existente
+        post.title = form.title.data
+        post.content = form.content.data
+        post.save()
+        logger.info(f'Guardando el post {post_id}')
+        return redirect(url_for('admin.list_posts'))
+    return render_template("admin/post_form.html", form=form, post=post)
+
+from flask import abort
+
+@admin_bp.route("/admin/post/delete/<int:post_id>/", methods=['POST', ])
+@login_required
+@admin_required
+def delete_post(post_id):
+    logger.info(f'Se va a eliminar el post {post_id}')
+    post = Post.get_by_id(post_id)
+    if post is None:
+        logger.info(f'El post {post_id} no existe')
+        abort(404)
+    post.delete()
+    logger.info(f'El post {post_id} ha sido eliminado')
+    return redirect(url_for('admin.list_posts'))

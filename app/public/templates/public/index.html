@@ -9,7 +9,10 @@
 
         <p>{{ post.summary }}</p>
 
-        <a href="{{ url_for('public.show_post', slug=post.title_slug) }}">Read more</a> 
+        <a href="{{ url_for('public.show_post', slug=post.title_slug) }}">Read more</a>
+    
+    {% else %}
+        <li>No hay entradas</li>
     {% endfor %}
     </ul>
 {% endblock %}

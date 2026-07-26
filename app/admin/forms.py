@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import (
     StringField,
+    SubmitField,
     TextAreaField,
-    SelectField,
-    SubmitField
+    BooleanField,
+    SelectField
 )
 from wtforms.validators import DataRequired, Length
 
@@ -52,3 +53,7 @@ class PostForm(FlaskForm):
     )
 
     submit = SubmitField("Save Post")
+
+class UserAdminForm(FlaskForm):
+    is_admin = BooleanField('Administrador')
+    submit = SubmitField('Guardar')
