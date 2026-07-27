@@ -4,7 +4,7 @@
 
 {% block content %}
     <ul>
-    {% for post in posts %}
+    {% for post in posts_pagination.items %}
         <li><a href="{{ url_for('public.show_post', slug=post.title_slug) }}">{{ post.title }}</a></li>
 
         <p>{{ post.summary }}</p>
@@ -14,5 +14,19 @@
     {% else %}
         <li>No hay entradas</li>
     {% endfor %}
+
+    <div class=pagination>
+        {%- for page in posts_pagination.iter_pages() %}
+            {% if page %}
+                {% if page != posts_pagination.page %}
+                    <a href="{{ url_for('public.index', page=page)}}">{{ page }}</a>
+                {% else %}
+                    <strong>{{ page }}</strong>
+                {% endif %}
+            {% else %}
+                <span class ellipsis>...</span>
+            {% endif %}
+        {%- endfor %}
+    </div>
     </ul>
 {% endblock %}

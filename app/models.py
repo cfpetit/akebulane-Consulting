@@ -1,3 +1,5 @@
+import datetime
+
 from flask import url_for
 from slugify import slugify
 from sqlalchemy.exc import IntegrityError
@@ -9,11 +11,12 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('blog_user.id', ondelete='CASCADE'), nullable=False)
     title = db.Column(db.String(256), nullable=False)
+    title_slug = db.Column(db.String(256), unique=True, nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     summary = db.Column(db.String(300), nullable=False)
     category = db.Column(db.String(50), nullable=False)
     image = db.Column(db.String(200))
-    title_slug = db.Column(db.String(256), unique=True, nullable=False)
-    content = db.Column(db.Text, nullable=False)
 
     def __repr__(self):
         return f'<Post {self.title}>'
@@ -51,3 +54,8 @@ class Post(db.Model):
     @staticmethod
     def get_by_slug(slug):
         return Post.query.filter_by(title_slug=slug).first()
+
+    @staticmethod
+    def all_paginated(page=1, per_page=20):
+        return Post.query.order_by(Post.created.asc()). \
+            paginate(page=page, per_page=per_page, error_out=False)

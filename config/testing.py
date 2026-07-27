@@ -1,6 +1,12 @@
 # config/testing.py
 
 from .default import *
+from sqlalchemy.pool import NullPool
+
+# Disable pooling during tests to prevent PostgreSQL transaction deadlocks
+SQLALCHEMY_ENGINE_OPTIONS = {
+    "poolclass": NullPool
+}
 
 
 # Parámetros para activar el modo debug
