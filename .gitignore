@@ -22,3 +22,6 @@ instance/
 
 # Logs
 *.log
+
+# Dumps
+myproject.dump
