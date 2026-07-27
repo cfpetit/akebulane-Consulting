@@ -71,17 +71,17 @@ def post_form():
         title = form.title.data
         summary = form.summary.data
         category = form.category.data
+        file = form.post_image.data
         image_name = None
-        if 'post_image' in request.files:
-           file = request.files['post_image']
-           if file.filename:
-              image_name = secure_filename(file.filename)
-              images_dir = current_app.config['POST_IMAGES_DIR']
-              os.makedirs(image_dirs, exist_ok=True)
-              file_path = os.path.join(images_dir, image_name)
-              file.save(file_path)
+        if file:
+           image_name = secure_filename(file.filename)
+           images_dir = current_app.config['POST_IMAGES_DIR']
+           os.makedirs(images_dir, exist_ok=True)
+           file_path = os.path.join(images_dir, image_name)
+           file.save(file_path)
         content = form.content.data
-        post = Post(user_id=current_user.id, title=title, content=content, summary=summary, category=category, image=image)
+        post = Post(user_id=current_user.id, title=title, content=content, summary=summary, category=category)
+        post.image_name = image_name
         post.save()
         return redirect(url_for('admin.list_posts'))
     return render_template("admin/post_form.html", form=form)
