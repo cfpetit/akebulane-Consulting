@@ -12,7 +12,8 @@ logger = logging.getLogger(__name__)
 def index():
     logger.info('Mostrando los posts del blog')
     page = int(request.args.get('page', 1))
-    posts_pagination = Post.all_paginated(page, 3)
+    per_page = current_app.config['ITEMS_PER_PAGE']
+    posts_pagination = Post.all_paginated(page, per_page)
     return render_template("public/index.html", posts_pagination=posts_pagination)
 
 
