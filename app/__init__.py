@@ -14,7 +14,6 @@ mail = Mail()
 def create_app(settings_module):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(settings_module)
-    mail.init_app(app)
     if app.config.get('TESTING', False):
         app.config.from_pyfile('config-testing.py', silent=True)
     else:
@@ -27,6 +26,7 @@ def create_app(settings_module):
 
     db.init_app(app)
     migrate.init_app(app,db)
+    mail.init_app(app)
 
     # Registro de los Blueprints
     from .auth import auth_bp

@@ -21,13 +21,12 @@ APP_ENV_PRODUCTION = 'production'
 APP_ENV = ''
 
 #Configuración del Email
-MAIL_SERVER = 'smtp.gmail.com'
-MAIL_PORT = 587
-MAIL_USERNAME = 'cfranciapetit@gmail.com'
+MAIL_SERVER = os.getenv("MAIL_SERVER")
+MAIL_PORT = int(os.getenv("MAIL_PORT", 587))
+MAIL_USE_TLS = os.getenv("MAIL_USE_TLS", "True") == "True"
+MAIL_USERNAME = os.getenv("MAIL_USERNAME")
 MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
-DONT_REPLY_FROM_EMAIL = 'cfranciapetit@gmail.com'
-ADMINS = ('cfranciapetit@gmail.com', )
-MAIL_USE_TLS = True
 MAIL_DEBUG = False
+DONT_REPLY_FROM_EMAIL = MAIL_USERNAME
 
 ITEMS_PER_PAGE = 3
