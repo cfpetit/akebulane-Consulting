@@ -1,44 +1,61 @@
+/* ===========================
+   POSTS GRID
+=========================== */
+
 .posts-container{
 
-    max-width:1300px;
+    max-width:1400px;
 
-    margin:50px auto;
+    margin:60px auto;
 
-    padding:0 30px;
+    padding:0 40px;
 
     display:grid;
 
-    grid-template-columns:
-        repeat(auto-fit,minmax(320px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
 
     gap:35px;
 }
+
+
+/* ===========================
+   CARD
+=========================== */
 
 .post-card{
 
     background:white;
 
-    border-radius:15px;
+    border-radius:16px;
 
     overflow:hidden;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
 
-    transition:.3s;
+    transition:.35s;
+
+    position:relative;
 }
 
 .post-card:hover{
 
     transform:translateY(-8px);
 
-    box-shadow:0 20px 40px rgba(0,0,0,.18);
+    box-shadow:0 25px 50px rgba(0,0,0,.18);
 }
+
+
+/* ===========================
+   IMAGE
+=========================== */
 
 .post-image{
 
     display:block;
 
-    height:220px;
+    position:relative;
+
+    height:260px;
 
     overflow:hidden;
 }
@@ -51,34 +68,97 @@
 
     object-fit:cover;
 
-    transition:.4s;
+    transition:.45s;
 }
 
-.post-card:hover img{
+.post-card:hover .post-image img{
 
     transform:scale(1.08);
 }
 
-.post-content{
 
-    padding:25px;
+/* ===========================
+   IMAGE OVERLAY
+=========================== */
+
+.post-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(11,35,65,.75);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+
+    text-align:center;
+
+    opacity:0;
+
+    transition:.35s;
 }
+
+.post-card:hover .post-overlay{
+
+    opacity:1;
+}
+
+.post-overlay h3{
+
+    color:white;
+
+    margin-bottom:20px;
+}
+
+.post-overlay p{
+
+    color:white;
+
+    line-height:1.6;
+
+    margin-bottom:25px;
+}
+
+
+/* ===========================
+   CATEGORY
+=========================== */
 
 .post-category{
 
     display:inline-block;
 
+    padding:6px 14px;
+
+    border-radius:30px;
+
     background:#d7b56d;
 
     color:white;
 
-    padding:4px 10px;
-
-    border-radius:20px;
-
     font-size:.8rem;
 
-    margin-bottom:15px;
+    font-weight:bold;
+
+    margin-bottom:18px;
+}
+
+
+/* ===========================
+   CONTENT
+=========================== */
+
+.post-content{
+
+    padding:28px;
 }
 
 .post-content h2{
@@ -88,33 +168,60 @@
 
 .post-content h2 a{
 
-    text-decoration:none;
-
     color:#0b2341;
-}
-
-.post-content p{
-
-    color:#666;
-
-    margin-bottom:25px;
-}
-
-.read-more{
-
-    color:#0b2341;
-
-    font-weight:bold;
 
     text-decoration:none;
 
     transition:.25s;
 }
 
-.read-more:hover{
+.post-content h2 a:hover{
 
     color:#d7b56d;
 }
+
+.post-content p{
+
+    color:#666;
+
+    line-height:1.7;
+
+    margin-bottom:25px;
+}
+
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.read-more{
+
+    display:inline-block;
+
+    padding:10px 20px;
+
+    border-radius:8px;
+
+    background:#0b2341;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:.25s;
+}
+
+.read-more:hover{
+
+    background:#d7b56d;
+}
+
+
+/* ===========================
+   PAGINATION
+=========================== */
 
 .pagination{
 
@@ -129,24 +236,31 @@
 
 .pagination a{
 
-    padding:10px 16px;
-
     background:#0b2341;
 
     color:white;
 
+    padding:10px 18px;
+
     border-radius:8px;
 
     text-decoration:none;
+
+    transition:.25s;
+}
+
+.pagination a:hover{
+
+    background:#d7b56d;
 }
 
 .pagination strong{
 
-    padding:10px 16px;
-
     background:#d7b56d;
 
     color:white;
+
+    padding:10px 18px;
 
     border-radius:8px;
 }
