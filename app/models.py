@@ -16,7 +16,7 @@ class Post(db.Model):
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     summary = db.Column(db.String(300), nullable=False)
     category = db.Column(db.String(50), nullable=False)
-    image = db.Column(db.String(200))
+    image_name = db.Column(db.String(200))
 
     def __repr__(self):
         return f'<Post {self.title}>'

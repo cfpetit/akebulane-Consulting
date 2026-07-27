@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import (
     StringField,
     SubmitField,
@@ -40,10 +41,10 @@ class PostForm(FlaskForm):
         validators=[DataRequired()]
     )
 
-    image = StringField(
+    post_image = FileField(
         "Image",
         validators=[
-            Length(max=200)
+            FileAllowed(['jpg, png'], 'Solo se permiten imágenes')
         ]
     )
 

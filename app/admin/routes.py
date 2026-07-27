@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, abort
+from flask import render_template, redirect, url_for, abort, request, current_app
 from flask_login import login_required, current_user
 
 from app.auth.decorators import admin_required
@@ -6,6 +6,7 @@ from app.models import Post
 from app.auth.models import User
 from . import admin_bp
 from .forms import PostForm, UserAdminForm
+from werkzeug.utils import secure_filename
 import logging
 import os
 
@@ -32,7 +33,7 @@ def update_user_form(user_id):
     if user is None:
         logger.info(f'El usuario {user_id} no existe')
         abort(404)
-    
+
     form = UserAdminForm(obj=user)
     if form.validate_on_submit():
         user.is_admin = form.is_admin.data
@@ -70,7 +71,15 @@ def post_form():
         title = form.title.data
         summary = form.summary.data
         category = form.category.data
-        image = form.image.data
+        image_name = None
+        if 'post_image' in request.files:
+           file = request.files['post_image']
+           if file.filename:
+              image_name = secure_filename(file.filename)
+              images_dir = current_app.config['POST_IMAGES_DIR']
+              os.makedirs(image_dirs, exist_ok=True)
+              file_path = os.path.join(images_dir, image_name)
+              file.save(file_path)
         content = form.content.data
         post = Post(user_id=current_user.id, title=title, content=content, summary=summary, category=category, image=image)
         post.save()
