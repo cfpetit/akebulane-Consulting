@@ -19,13 +19,23 @@
 }
 
 .logo{
-    font-size:1.4rem;
-    font-weight:bold;
+    display:flex;
+    align-items:center,
+}
 
-    color:white;
-    text-decoration:none;
+.logo img{
 
-    letter-spacing:1px;
+    height:55px;
+    width:auto;
+
+    display:block;
+
+    transform:transform .25s ease;
+}
+
+.logo:hover img{
+
+    transform:scale(1.03);
 }
 
 .navbar a{
