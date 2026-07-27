@@ -3,30 +3,95 @@
 {% block title %}Akebulan Consulting{% endblock %}
 
 {% block content %}
-    <ul>
+
+<div class="posts-container">
+
     {% for post in posts_pagination.items %}
-        <li><a href="{{ url_for('public.show_post', slug=post.title_slug) }}">{{ post.title }}</a></li>
 
-        <p>{{ post.summary }}</p>
+        <article class="post-card">
 
-        <a href="{{ url_for('public.show_post', slug=post.title_slug) }}">Read more</a>
-    
-    {% else %}
-        <li>No hay entradas</li>
+            <a href="{{ url_for('public.show_post', slug=post.title_slug) }}"
+               class="post-image">
+
+                {% if post.image_name %}
+                    <img src="{{ url_for('media_posts', filename=post.image_name) }}"
+                         alt="{{ post.title }}">
+                {% else %}
+                    <img src="{{ url_for('static',
+                        filename='images/default_post.jpg') }}"
+                        alt="{{ post.title }}">
+                {% endif %}
+
+            </a>
+
+            <div class="post-content">
+
+                <span class="post-category">
+
+                    {{ post.category }}
+
+                </span>
+
+                <h2>
+
+                    <a href="{{ url_for('public.show_post',
+                        slug=post.title_slug) }}">
+
+                        {{ post.title }}
+
+                    </a>
+
+                </h2>
+
+                <p>
+
+                    {{ post.summary }}
+
+                </p>
+
+                <a class="read-more"
+                   href="{{ url_for('public.show_post',
+                        slug=post.title_slug) }}">
+
+                    Read more →
+
+                </a>
+
+            </div>
+
+        </article>
+
     {% endfor %}
 
-    <div class=pagination>
-        {%- for page in posts_pagination.iter_pages() %}
-            {% if page %}
-                {% if page != posts_pagination.page %}
-                    <a href="{{ url_for('public.index', page=page)}}">{{ page }}</a>
-                {% else %}
-                    <strong>{{ page }}</strong>
-                {% endif %}
-            {% else %}
-                <span class ellipsis>...</span>
-            {% endif %}
-        {%- endfor %}
-    </div>
-    </ul>
+</div>
+
+
+<div class="pagination">
+
+{% for page in posts_pagination.iter_pages() %}
+
+    {% if page %}
+
+        {% if page != posts_pagination.page %}
+
+            <a href="{{ url_for('public.index', page=page) }}">
+                {{ page }}
+            </a>
+
+        {% else %}
+
+            <strong>{{ page }}</strong>
+
+        {% endif %}
+
+    {% else %}
+
+        <span>...</span>
+
+    {% endif %}
+
+{% endfor %}
+
+</div>
+
 {% endblock %}
