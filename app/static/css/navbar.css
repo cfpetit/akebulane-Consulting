@@ -1,62 +1,50 @@
 .navbar{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
 
-    padding:18px 40px;
+    padding:18px 50px;
 
-    background:#0b2341;
-    color:white;
+    background:var(--primary);
 
-    box-shadow:0 3px 10px rgba(0,0,0,.15);
+    box-shadow:var(--shadow);
 }
 
 .navbar-left,
 .navbar-right{
-    display:flex;
-    align-items:center;
-    gap:25px;
-}
 
-.logo{
     display:flex;
-    align-items:center,
+
+    align-items:center;
+
+    gap:30px;
 }
 
 .logo img{
 
-    height:55px;
+    height:65px;
+
     width:auto;
-
-    display:block;
-
-    transform:transform .25s ease;
-}
-
-.logo:hover img{
-
-    transform:scale(1.03);
 }
 
 .navbar a{
 
     color:white;
 
-    text-decoration:none;
-
-    font-weight:500;
-
-    transition:.25s;
+    font-weight:600;
 }
 
 .navbar a:hover{
 
-    color:#d7b56d;
+    color:var(--primary-light);
 }
 
 .username{
 
-    color:#d7b56d;
+    color:#8EB7FF;
 
-    font-weight:bold;
+    font-weight:700;
 }

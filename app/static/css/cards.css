@@ -87,7 +87,7 @@
 
     inset:0;
 
-    background:rgba(11,35,65,.75);
+    background:rgba(20,44,102,.82);
 
     display:flex;
 
@@ -168,7 +168,7 @@
 
 .post-content h2 a{
 
-    color:#0b2341;
+    color:var(--text);
 
     text-decoration:none;
 
@@ -177,12 +177,12 @@
 
 .post-content h2 a:hover{
 
-    color:#d7b56d;
+    color:var(--primary-light);
 }
 
 .post-content p{
 
-    color:#666;
+    color:var(--text-light);
 
     line-height:1.7;
 
@@ -202,7 +202,7 @@
 
     border-radius:8px;
 
-    background:#0b2341;
+    background:var(--primary);
 
     color:white;
 

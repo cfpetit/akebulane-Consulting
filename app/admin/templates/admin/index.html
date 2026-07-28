@@ -1,12 +1,27 @@
 {% extends "base_template.html" %}
 
-{% block title %}
-    Miniblog | Admin
-{% endblock %}
+{% block title %}Admin Panel{% endblock %}
 
 {% block content %}
-    <ul>
-        <li><a href="{{ url_for('admin.list_posts') }}">Posts</a></li>
-        <li><a href="{{ url_for('admin.list_users') }}">Usuarios</a></li>
-    </ul>
+
+<div class="admin-container">
+
+    <h1 class="admin-title">Administration</h1>
+
+    <div class="admin-grid">
+
+        <a href="{{ url_for('admin.list_posts') }}" class="admin-card">
+            <h2>Posts</h2>
+            <p>Create, edit and delete blog posts.</p>
+        </a>
+
+        <a href="{{ url_for('admin.list_users') }}" class="admin-card">
+            <h2>Users</h2>
+            <p>Manage registered users and permissions.</p>
+        </a>
+
+    </div>
+
+</div>
+
 {% endblock %}

@@ -1,31 +1,42 @@
 {% extends "base_template.html" %}
 
-{% block title %}
-    {{ user.name }}
-{% endblock %}
+{% block title %}{{ user.name }}{% endblock %}
 
 {% block content %}
-    <h2>Detalle del usuario</h2>
-    <div>
-    Nombre: {{ user.name }}
-    </div>
-    <div>
-    Email: {{ user.email }}
-    </div>
-    <form action="" method="post" novalidate>
+
+<div class="form-container">
+
+    <h1>{{ user.name }}</h1>
+
+    <p><strong>Email:</strong> {{ user.email }}</p>
+
+    <form method="post">
+
         {{ form.hidden_tag() }}
-        <div>
+
+        <div class="form-group">
+
             {{ form.is_admin.label }}
-            {{ form.is_admin }}<br>
-            {% for error in form.is_admin.errors %}
-            <span style="color: red;">{{ error }}</span>
-            {% endfor %}
+
+            {{ form.is_admin() }}
+
         </div>
-        <div>
-            {{ form.submit() }}
-        </div>
+
+        {{ form.submit(class="btn-primary") }}
+
     </form>
-    <form action="{{ url_for('admin.delete_user', user_id=user.id) }}" method="post" novalidate>
-        <input type="submit" value="Eliminar" />
+
+    <hr>
+
+    <form action="{{ url_for('admin.delete_user', user_id=user.id) }}"
+          method="post">
+
+        <input type="submit"
+               value="Delete User"
+               class="btn-danger">
+
     </form>
+
+</div>
+
 {% endblock %}

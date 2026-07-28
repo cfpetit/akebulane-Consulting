@@ -1,0 +1,17 @@
+footer{
+
+    margin-top:80px;
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:50px;
+
+    text-align:center;
+}
+
+footer p{
+
+    color:white;
+}

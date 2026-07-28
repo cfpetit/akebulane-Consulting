@@ -1,0 +1,23 @@
+.hero{
+
+    text-align:center;
+
+    padding:60px 0 40px;
+}
+
+.hero h1{
+
+    font-size:3rem;
+}
+
+.hero p{
+
+    max-width:700px;
+
+    margin:auto;
+}
+
+.posts-container{
+
+    margin-top:60px;
+}

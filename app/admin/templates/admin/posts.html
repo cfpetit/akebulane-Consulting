@@ -1,19 +1,36 @@
 {% extends "base_template.html" %}
 
-{% block title %}
-    Listado de posts
-{% endblock %}
+{% block title %}Posts{% endblock %}
 
 {% block content %}
-    <div>
-        <a href="{{ url_for('admin.post_form') }}">Añadir entrada</a>
+
+<div class="admin-container">
+
+    <div class="admin-header">
+
+        <h1>Posts</h1>
+
+        <a href="{{ url_for('admin.post_form') }}" class="btn-primary">
+            + New Post
+        </a>
+
     </div>
-    <h2>Listado de entradas</h2>
-    <ul>
-    {% for post in posts %}
-        <li>
-            <a href="{{ url_for('admin.update_post_form', post_id=post.id) }}">{{ post.title }}</a>
-        </li>
-    {% endfor %}
-    </ul>
+
+    <div class="admin-list">
+
+        {% for post in posts %}
+
+        <a class="admin-item"
+           href="{{ url_for('admin.update_post_form', post_id=post.id) }}">
+
+            {{ post.title }}
+
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
 {% endblock %}

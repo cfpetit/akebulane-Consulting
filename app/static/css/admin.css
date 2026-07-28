@@ -1,0 +1,207 @@
+/* ==========================
+   ADMIN LAYOUT
+========================== */
+
+.admin-container{
+
+    max-width:1100px;
+
+    margin:60px auto;
+
+    padding:0 40px;
+
+}
+
+.admin-title{
+
+    font-size:2.2rem;
+
+    margin-bottom:40px;
+
+    color:var(--primary);
+
+}
+
+/* ==========================
+   DASHBOARD
+========================== */
+
+.admin-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+    gap:30px;
+
+}
+
+.admin-card{
+
+    background:var(--surface);
+
+    border-radius:16px;
+
+    padding:35px;
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+}
+
+.admin-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.admin-card h2{
+
+    margin-bottom:15px;
+
+    color:var(--primary);
+
+}
+
+/* ==========================
+   POSTS / USERS
+========================== */
+
+.admin-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+}
+
+.admin-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+.admin-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:22px;
+
+    background:white;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    color:var(--text);
+
+    box-shadow:var(--shadow);
+
+    transition:.25s;
+
+}
+
+.admin-item:hover{
+
+    transform:translateX(6px);
+
+}
+
+.admin-badge{
+
+    background:var(--accent);
+
+    color:white;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-size:.8rem;
+
+}
+
+/* ==========================
+   FORMS
+========================== */
+
+.form-container{
+
+    max-width:850px;
+
+    margin:60px auto;
+
+    padding:40px;
+
+    background:white;
+
+    border-radius:18px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.form-container h1{
+
+    margin-bottom:30px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:25px;
+
+}
+
+.form-group label{
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+}
+
+.form-group input,
+
+.form-group textarea,
+
+.form-group select{
+
+    padding:14px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    font-size:1rem;
+
+}
+
+.form-group textarea{
+
+    resize:vertical;
+
+    min-height:180px;
+
+}
