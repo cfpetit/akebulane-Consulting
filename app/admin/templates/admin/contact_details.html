@@ -1,0 +1,72 @@
+{% extends "base_template.html" %}
+
+{% block title %}
+Contact Message
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-page">
+
+    <h1>{{ message.subject }}</h1>
+
+    <p>
+
+        <strong>Name:</strong>
+        {{ message.name }}
+
+    </p>
+
+    <p>
+
+        <strong>Email:</strong>
+        {{ message.email }}
+
+    </p>
+
+    <p>
+
+        <strong>Company:</strong>
+        {{ message.company or "-" }}
+
+    </p>
+
+    <p>
+
+        <strong>Phone:</strong>
+        {{ message.phone or "-" }}
+
+    </p>
+
+    <p>
+
+        <strong>Date:</strong>
+
+        {{ message.created.strftime("%d/%m/%Y %H:%M") }}
+
+    </p>
+
+    <hr>
+
+    <p>
+
+        {{ message.message }}
+
+    </p>
+
+    <br>
+
+    <form method="POST"
+          action="{{ url_for('admin.delete_contact', id=message.id) }}">
+
+        <button class="btn btn-danger">
+
+            Delete message
+
+        </button>
+
+    </form>
+
+</section>
+
+{% endblock %}

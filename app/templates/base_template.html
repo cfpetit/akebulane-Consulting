@@ -1,55 +1,93 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>{% block title %}{% endblock %}</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <!--- Base --->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-    <!--- Layout --->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
-    <!--- Components --->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/buttons.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/cards.css') }}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <!--- Pages --->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
 
-    <!--- Effects --->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/navbar.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/footer.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/buttons.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/forms.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/cards.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/index.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/contact.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/animations.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/footer.css') }}">
 </head>
 
 <body>
 
 <nav class="navbar">
+
     <div class="navbar-left">
 
-        <a href="{{ url_for('public.index') }}" class="logo">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Akebulan International Consulting">
+        <a href="{{ url_for('public.index') }}"
+           class="logo">
+
+            <img src="{{ url_for('static', filename='images/logo.png') }}"
+                 alt="Akebulan International Consulting">
+
         </a>
 
-     </div>
+    </div>
 
-     <div class="navbar-right">
+    <div class="navbar-right">
 
-         <a href="{{ url_for('public.index') }}">
-             Home
-         </a>
+        <a href="{{ url_for('public.index') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('contact.contact') }}">
+            Contact
+        </a>
 
         {% if current_user.is_anonymous %}
 
-            <a href="{{ url_for('auth.login') }}">    
+            <a href="{{ url_for('auth.login') }}">
                 Login
             </a>
+
             <a href="{{ url_for('auth.show_signup_form') }}">
                 Register
             </a>
@@ -57,6 +95,7 @@
         {% else %}
 
             {% if current_user.is_admin %}
+
                 <a href="{{ url_for('admin.index') }}">
                     Admin
                 </a>
@@ -64,35 +103,43 @@
             {% endif %}
 
             <span class="username">
+
                 {{ current_user.name }}
+
             </span>
 
             <a href="{{ url_for('auth.logout') }}">
                 Logout
             </a>
-    {% endif %}
 
- </div>
+        {% endif %}
+
+    </div>
 
 </nav>
 
 <main>
 
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 
 </main>
 
+<footer class="footer">
+
+    <div class="footer-content">
+
+
 <script>
 
-window.addEventListener("scroll", function(){
+window.addEventListener("scroll", function () {
 
     const navbar = document.querySelector(".navbar");
 
-    if(window.scrollY > 60){
+    if (window.scrollY > 60) {
 
         navbar.classList.add("scrolled");
 
-    }else{
+    } else {
 
         navbar.classList.remove("scrolled");
 
@@ -101,6 +148,55 @@ window.addEventListener("scroll", function(){
 });
 
 </script>
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <!-- Column 1: Company Info -->
+        <div class="footer-col company-col">
+            <h3 class="footer-brand">YourCompany</h3>
+            <p class="footer-description">
+                Providing expert international, business, and legal consulting to help your venture grow globally.
+            </p>
+            <div class="footer-contact">
+                <p>📍 123 Business Way, Suite 400</p>
+                <p>✉️ contact@yourcompany.com</p>
+                <p>📞 +1 (555) 019-2834</p>
+            </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul class="footer-links">
+                <li><a href="{{ url_for('public.index') }}">Home</a></li>
+                <li><a href="{{ url_for('contact.contact') }}">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Column 4: Social Media -->
+        <div class="footer-col">
+            <h4>Connect</h4>
+            <p class="footer-subtext">Follow us on social media for updates and legal insights.</p>
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+                <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a>
+                <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Bar: Legal & Copyright -->
+    <div class="footer-bottom">
+        <div class="footer-bottom-container">
+            <p>&copy; 2026 YourCompany. All rights reserved.</p>
+            <div class="legal-links">
+                <a href="#">Privacy Policy</a>
+                <span class="divider">•</span>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </body>
 

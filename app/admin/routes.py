@@ -1,14 +1,16 @@
-from flask import render_template, redirect, url_for, abort, request, current_app
+from flask import render_template, redirect, url_for, abort, request, current_app, flash
 from flask_login import login_required, current_user
 
 from app.auth.decorators import admin_required
 from app.models import Post
 from app.auth.models import User
+from app.contact.models import ContactMessage
 from . import admin_bp
 from .forms import PostForm, UserAdminForm
 from werkzeug.utils import secure_filename
 import logging
 import os
+from app import db
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +19,59 @@ logger = logging.getLogger(__name__)
 @admin_required
 def index():
     return render_template("admin/index.html")
+
+
+@admin_bp.route("/contacts")
+@login_required
+def contacts():
+
+    if not current_user.is_admin:
+        abort(403)
+
+    messages = ContactMessage.get_all()
+
+    return render_template(
+        "contact/admin_contacts.html",
+        messages=messages
+    )
+
+
+@admin_bp.route("/contacts/<int:id>")
+@login_required
+def contact_detail(id):
+
+    if not current_user.is_admin:
+        abort(403)
+
+    message = ContactMessage.get_by_id(id)
+
+    if not message:
+        abort(404)
+
+    message.is_read = True
+    db.session.commit()
+
+    return render_template(
+        "admin/contact_details.html",
+        message=message
+    )
+
+
+@admin_bp.route("/contacts/delete/<int:id>", methods=["POST"])
+@login_required
+def delete_contact(id):
+
+    if not current_user.is_admin:
+        abort(403)
+
+    message = ContactMessage.get_by_id(id)
+
+    if message:
+        message.delete()
+
+    flash("Message deleted successfully.")
+
+    return redirect(url_for("admin.contacts"))
 
 @admin_bp.route("/admin/users")
 @login_required

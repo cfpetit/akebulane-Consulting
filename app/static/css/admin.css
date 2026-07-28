@@ -205,3 +205,47 @@
     min-height:180px;
 
 }
+
+/* ==========================
+   ADMIN TABLES
+========================== */
+
+.messages-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin-top: 20px;
+}
+
+.messages-table th,
+.messages-table td {
+    padding: 16px 20px;
+    text-align: left;
+    background: white;
+    border-bottom: 1px solid #eee;
+}
+
+.messages-table th {
+    background: var(--primary);
+    color: white;
+    padding: 16px 20px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.messages-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.messages-table tbody tr:hover {
+    background-color: #f8fafc; /* Subtle hover effect */
+}
+
+/* Adjust button size specifically inside tables */
+.messages-table td .btn {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+}
