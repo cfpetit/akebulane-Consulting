@@ -1,0 +1,29 @@
+{% extends "base_template.html" %}
+
+{% block title %}Message Sent{% endblock %}
+
+{% block content %}
+
+<section class="contact-success">
+
+    <i class="fa-solid fa-circle-check success-icon"></i>
+
+    <h1>Thank You!</h1>
+
+    <p>
+
+        Your message has been received successfully.
+
+        A member of our team will contact you as soon as possible.
+
+    </p>
+
+    <a href="{{ url_for('public.index') }}" class="btn">
+
+        Return to Homepage
+
+    </a>
+
+</section>
+
+{% endblock %}

@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     posts = db.relationship(
         "Post",
         back_populates="user",
-        cascade="all, delete_orphan"
+        cascade="all, delete-orphan"
     )
 
     def __init__(self, name, email):

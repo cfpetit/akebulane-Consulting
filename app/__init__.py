@@ -38,6 +38,9 @@ def create_app(settings_module):
     from .public import public_bp
     app.register_blueprint(public_bp)
 
+    from .contact import contact_bp
+    app.register_blueprint(contact_bp)
+
     register_error_handlers(app)
 
     return app

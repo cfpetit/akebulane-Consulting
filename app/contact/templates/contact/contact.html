@@ -1,0 +1,151 @@
+{% extends "base_template.html" %}
+
+{% block title %}Contact Us | Akebulan International Consulting{% endblock %}
+
+{% block content %}
+
+<section class="contact-page">
+
+    <div class="contact-header">
+
+        <h1>Let's Start a Conversation</h1>
+
+        <p>
+            Whether you are looking for international consulting,
+            immigration support or strategic partnerships, we are here
+            to help.
+        </p>
+
+    </div>
+
+    <div class="contact-container">
+
+        <div class="contact-info">
+
+            <h2>Contact Information</h2>
+
+            <div class="contact-item">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <div>
+
+                    <strong>Email</strong>
+
+                    <p>info@akebulanconsulting.com</p>
+
+                </div>
+
+            </div>
+
+            <div class="contact-item">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <div>
+
+                    <strong>Phone</strong>
+
+                    <p>+34 XXX XXX XXX</p>
+
+                </div>
+
+            </div>
+
+            <div class="contact-item">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <div>
+
+                    <strong>Office</strong>
+
+                    <p>Madrid, Spain</p>
+
+                </div>
+
+            </div>
+
+            <div class="contact-item">
+
+                <i class="fa-solid fa-globe"></i>
+
+                <div>
+
+                    <strong>Areas Served</strong>
+
+                    <p>Europe • Africa</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="contact-form-card">
+
+            <h2>Send us a message</h2>
+
+            <form method="POST">
+
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+
+                    {{ form.name.label }}
+
+                    {{ form.name(class="form-control") }}
+
+                </div>
+
+                <div class="form-group">
+
+                    {{ form.email.label }}
+
+                    {{ form.email(class="form-control") }}
+
+                </div>
+
+                <div class="form-group">
+
+                    {{ form.company.label }}
+
+                    {{ form.company(class="form-control") }}
+
+                </div>
+
+                <div class="form-group">
+
+                    {{ form.phone.label }}
+
+                    {{ form.phone(class="form-control") }}
+
+                </div>
+
+                <div class="form-group">
+
+                    {{ form.subject.label }}
+
+                    {{ form.subject(class="form-control") }}
+
+                </div>
+
+                <div class="form-group">
+
+                    {{ form.message.label }}
+
+                    {{ form.message(class="form-control", rows="8") }}
+
+                </div>
+
+                {{ form.submit(class="btn") }}
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

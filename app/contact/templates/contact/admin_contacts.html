@@ -1,0 +1,133 @@
+{% extends "base_template.html" %}
+
+{% block title %}Contact Messages{% endblock %}
+
+{% block content %}
+
+<section class="admin-messages">
+
+    <div class="section-title">
+
+        <h2>Contact Messages</h2>
+
+        <p>
+
+            Messages received from the website.
+
+        </p>
+
+    </div>
+
+    <table class="messages-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Name</th>
+
+                <th>Email</th>
+
+                <th>Subject</th>
+
+                <th>Date</th>
+
+                <th>Status</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for message in messages %}
+
+            <tr>
+
+                <td>{{ message.name }}</td>
+
+                <td>{{ message.email }}</td>
+
+                <td>{{ message.subject }}</td>
+
+                <td>{{ message.created.strftime('%d %b %Y') }}</td>
+
+                <td>
+
+                    {% if message.is_read %}
+
+                        <span class="badge-read">
+
+                            Read
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge-unread">
+
+                            New
+
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+
+                    <a href="{{ url_for('contact.mark_as_read', message_id=message.id) }}">
+
+                        Open
+
+                    </a>
+
+                    |
+
+                    <a href="{{ url_for('contact.delete_message', message_id=message.id) }}">
+
+                        Delete
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td colspan="6">
+
+                    <strong>Company:</strong>
+
+                    {{ message.company or "-" }}
+
+                    <br><br>
+
+                    <strong>Phone:</strong>
+
+                    {{ message.phone or "-" }}
+
+                    <br><br>
+
+                    <strong>Message:</strong>
+
+                    <br>
+
+                    {{ message.message }}
+
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</section>
+
+{% endblock %}

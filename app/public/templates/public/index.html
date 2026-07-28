@@ -227,38 +227,138 @@
 </section>
 
 <!-- ======================================
-            LATEST INSIGHTS
+        INSIGHTS & PUBLICATIONS
 ======================================= -->
 
 <section id="insights">
 
     <div class="section-title">
 
-        <h2>Latest Insights</h2>
+        <h2>Insights & Publications</h2>
 
         <p>
-            News, analysis and strategic articles from our consultants.
+            Expert perspectives on international consulting,
+            immigration, business expansion and African-European
+            cooperation.
         </p>
 
     </div>
 
+    {% if latest_posts %}
+
+    <!-- ===========================
+            FEATURED ARTICLE
+    ============================ -->
+
+    {% set featured = latest_posts[0] %}
+
+    <article class="featured-post">
+
+        <a href="{{ url_for('public.show_post', slug=featured.title_slug) }}"
+           class="featured-image">
+
+            {% if featured.image_name %}
+
+                <img
+                    src="{{ url_for('media_posts', filename=featured.image_name) }}"
+                    alt="{{ featured.title }}">
+
+            {% else %}
+
+                <img
+                    src="{{ url_for('static', filename='images/default_post.jpg') }}"
+                    alt="{{ featured.title }}">
+
+            {% endif %}
+
+        </a>
+
+        <div class="featured-content">
+
+            <span class="post-category">
+
+                {{ featured.category }}
+
+            </span>
+
+            <div class="post-meta">
+
+                <span>
+
+                    {{ featured.created.strftime("%d %B %Y") }}
+
+                </span>
+
+                <span>•</span>
+
+                <span>
+
+                    {{ featured.reading_time }}
+
+                </span>
+
+                <span>•</span>
+
+                <span>
+
+                    By {{ featured.user.name }}
+
+                </span>
+
+            </div>
+
+            <h2>
+
+                <a href="{{ url_for('public.show_post', slug=featured.title_slug) }}">
+
+                    {{ featured.title }}
+
+                </a>
+
+            </h2>
+
+            <p>
+
+                {{ featured.summary }}
+
+            </p>
+
+            <a
+                href="{{ url_for('public.show_post', slug=featured.title_slug) }}"
+                class="btn">
+
+                Read Article →
+
+            </a>
+
+        </div>
+
+    </article>
+
+    <!-- ===========================
+            SECONDARY ARTICLES
+    ============================ -->
+
     <div class="posts-container">
 
-        {% for post in latest_posts %}
+        {% for post in latest_posts[1:] %}
 
         <article class="post-card">
 
-            <a href="{{ url_for('public.show_post', slug=post.title_slug) }}" class="post-image">
+            <a href="{{ url_for('public.show_post', slug=post.title_slug) }}"
+               class="post-image">
 
                 {% if post.image_name %}
 
-                    <img src="{{ url_for('media_posts', filename=post.image_name) }}"
-                         alt="{{ post.title }}">
+                    <img
+                        src="{{ url_for('media_posts', filename=post.image_name) }}"
+                        alt="{{ post.title }}">
 
                 {% else %}
 
-                    <img src="{{ url_for('static', filename='images/default_post.jpg') }}"
-                         alt="{{ post.title }}">
+                    <img
+                        src="{{ url_for('static', filename='images/default_post.jpg') }}"
+                        alt="{{ post.title }}">
 
                 {% endif %}
 
@@ -270,7 +370,7 @@
 
                     <span class="read-more">
 
-                        Read More →
+                        Read Article →
 
                     </span>
 
@@ -286,6 +386,32 @@
 
                 </span>
 
+                <div class="post-meta">
+
+                    <span>
+
+                        {{ post.created.strftime("%d %b %Y") }}
+
+                    </span>
+
+                    <span>•</span>
+
+                    <span>
+
+                        {{ post.reading_time }}
+
+                    </span>
+
+                    <span>•</span>
+
+                    <span>
+
+                        {{ post.user.name }}
+
+                    </span>
+
+                </div>
+
                 <h2>
 
                     <a href="{{ url_for('public.show_post', slug=post.title_slug) }}">
@@ -296,6 +422,12 @@
 
                 </h2>
 
+                <p>
+
+                    {{ post.summary }}
+
+                </p>
+
             </div>
 
         </article>
@@ -303,6 +435,18 @@
         {% endfor %}
 
     </div>
+
+    <div class="insights-footer">
+
+        <a href="#" class="btn btn-outline">
+
+            View All Publications →
+
+        </a>
+
+    </div>
+
+    {% endif %}
 
 </section>
 
