@@ -1,16 +1,28 @@
 .navbar{
 
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
     display:flex;
 
     justify-content:space-between;
 
     align-items:center;
 
-    padding:18px 50px;
+    padding:18px 70px;
 
-    background:var(--primary);
+    background:rgba(20,44,102,.97);
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(12px);
 
     box-shadow:var(--shadow);
+
+    transition:all .3s ease;
 }
 
 .navbar-left,
@@ -19,8 +31,18 @@
     display:flex;
 
     align-items:center;
+}
 
-    gap:30px;
+.navbar-right{
+
+    gap:32px;
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
 }
 
 .logo img{
@@ -28,6 +50,15 @@
     height:65px;
 
     width:auto;
+
+    display:block;
+
+    transition:transform .25s ease;
+}
+
+.logo:hover img{
+
+    transform:scale(1.03);
 }
 
 .navbar a{
@@ -35,6 +66,10 @@
     color:white;
 
     font-weight:600;
+
+    letter-spacing:.3px;
+
+    transition:color .25s ease;
 }
 
 .navbar a:hover{
@@ -47,4 +82,8 @@
     color:#8EB7FF;
 
     font-weight:700;
+
+    margin-left:8px;
+
+    margin-right:8px;
 }

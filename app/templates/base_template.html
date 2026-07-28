@@ -6,6 +6,8 @@
 
     <title>{% block title %}{% endblock %}</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
     <!--- Base --->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 
@@ -79,6 +81,26 @@
 {% block content %}{% endblock %}
 
 </main>
+
+<script>
+
+window.addEventListener("scroll", function(){
+
+    const navbar = document.querySelector(".navbar");
+
+    if(window.scrollY > 60){
+
+        navbar.classList.add("scrolled");
+
+    }else{
+
+        navbar.classList.remove("scrolled");
+
+    }
+
+});
+
+</script>
 
 </body>
 

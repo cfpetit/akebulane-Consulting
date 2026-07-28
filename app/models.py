@@ -10,10 +10,12 @@ from app import db
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('blog_user.id', ondelete='CASCADE'), nullable=False)
+    user = db.relationship("User", back_populates="posts")
     title = db.Column(db.String(256), nullable=False)
     title_slug = db.Column(db.String(256), unique=True, nullable=False)
     content = db.Column(db.Text, nullable=False)
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    updated = db.Column(db.DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
     summary = db.Column(db.String(300), nullable=False)
     category = db.Column(db.String(50), nullable=False)
     image_name = db.Column(db.String(200))
@@ -43,6 +45,12 @@ class Post(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    @property
+    def reading_time(self):
+        words = len(self.content.split())
+        minutes = max(1, round(words / 200))
+        return f"{minutes} min read"
+
     @staticmethod
     def get_by_id(id):
         return Post.query.get(id)
@@ -57,5 +65,8 @@ class Post(db.Model):
 
     @staticmethod
     def all_paginated(page=1, per_page=20):
-        return Post.query.order_by(Post.created.asc()). \
-            paginate(page=page, per_page=per_page, error_out=False)
+        return(
+            Post.query
+            .order_by(Post.created.desc())
+            .paginate(page=page, per_page=per_page, error_out=False)
+        )

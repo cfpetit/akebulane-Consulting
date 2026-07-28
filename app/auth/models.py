@@ -14,6 +14,12 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(256), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
+    posts = db.relationship(
+        "Post",
+        back_populates="user",
+        cascade="all, delete_orphan"
+    )
+
     def __init__(self, name, email):
         self.name = name
         self.email = email

@@ -11,10 +11,14 @@ logger = logging.getLogger(__name__)
 @public_bp.route("/")
 def index():
     logger.info('Mostrando los posts del blog')
-    page = int(request.args.get('page', 1))
-    per_page = current_app.config['ITEMS_PER_PAGE']
-    posts_pagination = Post.all_paginated(page, per_page)
-    return render_template("public/index.html", posts_pagination=posts_pagination)
+
+    latest_posts = (
+        Post.query
+        .order_by(Post.created.desc())
+        .limit(3)
+        .all()
+    )
+    return render_template("public/index.html", latest_posts=latest_posts)
 
 
 @public_bp.route("/p/<string:slug>/")

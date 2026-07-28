@@ -34,3 +34,9 @@
 
     transform:rotate(3deg);
 }
+
+.navbar.scrolled{
+
+    padding:12px 50px;
+
+}
