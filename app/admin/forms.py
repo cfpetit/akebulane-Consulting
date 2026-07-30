@@ -58,3 +58,20 @@ class PostForm(FlaskForm):
 class UserAdminForm(FlaskForm):
     is_admin = BooleanField('Administrador')
     submit = SubmitField('Guardar')
+class SiteContentForm(FlaskForm):
+    key = StringField(
+        "Identifier Key (e.g., hero_title)",
+        validators=[
+            DataRequired(),
+            Length(max=100)
+        ]
+    )
+    description = StringField(
+        "Description (What is this text for?)",
+        validators=[Length(max=255)]
+    )
+    content = TextAreaField(
+        "Content",
+        validators=[DataRequired()]
+    )
+    submit = SubmitField("Save Content")

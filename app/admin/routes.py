@@ -2,11 +2,11 @@ from flask import render_template, redirect, url_for, abort, request, current_ap
 from flask_login import login_required, current_user
 
 from app.auth.decorators import admin_required
-from app.models import Post
+from app.models import Post, SiteContent
 from app.auth.models import User
 from app.contact.models import ContactMessage
 from . import admin_bp
-from .forms import PostForm, UserAdminForm
+from .forms import PostForm, UserAdminForm, SiteContentForm
 from werkzeug.utils import secure_filename
 import logging
 import os
@@ -145,18 +145,39 @@ def post_form():
 @login_required
 @admin_required
 def update_post_form(post_id):
-    """Actualiza un post existente"""
+    """Actualiza un post existente, incluyendo su imagen"""
     post = Post.get_by_id(post_id)
     if post is None:
         logger.info(f'El post {post_id} no existe')
         abort(404)
-    # Crea un formulario inicializando los campos con
-    # los valores del post.
+    # Initialize the form with existing post data
     form = PostForm(obj=post)
     if form.validate_on_submit():
-        # Actualiza los campos del post existente
+        # Update text fields
         post.title = form.title.data
+        post.summary = form.summary.data
+        post.category = form.category.data
         post.content = form.content.data
+        # Handle potential new image upload
+        file = form.post_image.data
+        if file:
+            image_name = secure_filename(file.filename)
+            images_dir = current_app.config['POST_IMAGES_DIR'] # Ensure this points to media/posts
+            os.makedirs(images_dir, exist_ok=True)
+            file_path = os.path.join(images_dir, image_name)
+            # Save the new file
+            file.save(file_path)
+            # Optional: Delete the old image file to save space
+            if post.image_name:
+                old_file_path = os.path.join(images_dir, post.image_name)
+                if os.path.exists(old_file_path):
+                    try:
+                        os.remove(old_file_path)
+                    except OSError as e:
+                        logger.error(f"Error deleting old image {old_file_path}: {e}")
+            # Update the model with the new filename
+            post.image_name = image_name
+
         post.save()
         logger.info(f'Guardando el post {post_id}')
         return redirect(url_for('admin.list_posts'))
@@ -176,3 +197,62 @@ def delete_post(post_id):
     post.delete()
     logger.info(f'El post {post_id} ha sido eliminado')
     return redirect(url_for('admin.list_posts'))
+
+
+@admin_bp.route("/admin/content")
+@login_required
+@admin_required
+def list_content():
+    """Muestra todos los textos dinámicos de la página"""
+    items = SiteContent.get_all()
+    return render_template("admin/content_list.html", items=items)
+
+@admin_bp.route("/admin/content/new/", methods=['GET', 'POST'])
+@login_required
+@admin_required
+def create_content():
+    """Crea un nuevo bloque de texto dinámico"""
+    form = SiteContentForm()
+    if form.validate_on_submit():
+        item = SiteContent(
+            key=form.key.data,
+            description=form.description.data,
+            content=form.content.data
+        )
+        item.save()
+        logger.info(f'Nuevo contenido creado: {item.key}')
+        flash('Contenido creado exitosamente.')
+        return redirect(url_for('admin.list_content'))
+    return render_template("admin/content_form.html", form=form)
+
+@admin_bp.route("/admin/content/<int:item_id>/", methods=['GET', 'POST'])
+@login_required
+@admin_required
+def edit_content(item_id):
+    """Edita un bloque de texto dinámico existente"""
+    item = SiteContent.query.get(item_id)
+    if item is None:
+        abort(404)
+    form = SiteContentForm(obj=item)
+    if form.validate_on_submit():
+        item.key = form.key.data
+        item.description = form.description.data
+        item.content = form.content.data
+        item.save()
+        logger.info(f'Contenido actualizado: {item.key}')
+        flash('Contenido actualizado exitosamente.')
+        return redirect(url_for('admin.list_content'))
+    return render_template("admin/content_form.html", form=form, item=item)
+
+@admin_bp.route("/admin/content/delete/<int:item_id>/", methods=['POST'])
+@login_required
+@admin_required
+def delete_content(item_id):
+    """Elimina un bloque de texto dinámico"""
+    item = SiteContent.query.get(item_id)
+    if item is None:
+        abort(404)
+    db.session.delete(item)
+    db.session.commit()
+    flash('Contenido eliminado exitosamente.')
+    return redirect(url_for('admin.list_content'))

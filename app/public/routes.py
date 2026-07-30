@@ -1,6 +1,6 @@
 from flask import abort, render_template, current_app, request
 
-from app.models import Post
+from app.models import Post, SiteContent
 from . import public_bp
 
 import logging
@@ -18,7 +18,10 @@ def index():
         .limit(3)
         .all()
     )
-    return render_template("public/index.html", latest_posts=latest_posts)
+
+    content_items = SiteContent.get_all()
+    site_texts = {item.key: item.content for item in content_items}
+    return render_template("public/index.html", latest_posts=latest_posts, texts=site_texts)
 
 
 @public_bp.route("/p/<string:slug>/")

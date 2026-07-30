@@ -70,3 +70,28 @@ class Post(db.Model):
             .order_by(Post.created.desc())
             .paginate(page=page, per_page=per_page, error_out=False)
         )
+
+class SiteContent(db.Model):
+    __tablename__ = 'site_content'
+    id = db.Column(db.Integer, primary_key=True)
+    # The 'key' identifies the piece of text (e.g., 'hero_title', 'about_text')
+    key = db.Column(db.String(100), unique=True, nullable=False, index=True)
+    # The actual text content to display
+    content = db.Column(db.Text, nullable=False)
+    # A human-readable description for the admin panel
+    description = db.Column(db.String(255))
+    def __repr__(self):
+        return f'<SiteContent {self.key}>'
+
+    def save(self):
+        if not self.id:
+            db.session.add(self)
+        db.session.commit()
+    @staticmethod
+    def get_value(key, default=""):
+        """Utility method to quickly grab content by key"""
+        item = SiteContent.query.filter_by(key=key).first()
+        return item.content if item else default
+    @staticmethod
+    def get_all():
+        return SiteContent.query.order_by(SiteContent.key).all()
