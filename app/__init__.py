@@ -10,6 +10,47 @@ db = SQLAlchemy()
 migrate = Migrate()
 mail = Mail()
 
+def auto_seed_site_content():
+    """Auto-populates missing default content on server startup."""
+    from app.models import SiteContent
+    from app import db
+
+    DEFAULT_CONTENTS = [
+        {
+            "key": "home_hero_title",
+            "description": "Homepage - Main banner headline",
+            "content": "International Consulting<br>for Africa and Europe"
+        },
+        {
+            "key": "home_hero_subtitle",
+            "description": "Homepage - Paragraph text under the headline",
+            "content": "We provide international consulting, immigration support, market entry strategies and business advisory services connecting Europe and Africa."
+        },
+        {
+            "key": "home_services_title",
+            "description": "Homepage - Heading for Our Services section",
+            "content": "Our Services"
+        },
+        {
+            "key": "home_why_cta_title",
+            "description": "Homepage - Bottom call-to-action headline",
+            "content": "Ready to expand internationally?"
+        }
+    ]
+
+    try:
+        for item in DEFAULT_CONTENTS:
+            existing = SiteContent.query.filter_by(key=item["key"]).first()
+            if not existing:
+                new_content = SiteContent(
+                    key=item["key"],
+                    description=item["description"],
+                    content=item["content"]
+                )
+                db.session.add(new_content)
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
 
 def create_app(settings_module):
     app = Flask(__name__, instance_relative_config=True)
@@ -42,6 +83,9 @@ def create_app(settings_module):
     app.register_blueprint(contact_bp)
 
     register_error_handlers(app)
+
+    with app.app_context():
+        auto_seed_site_content()
 
     return app
 

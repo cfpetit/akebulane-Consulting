@@ -1,0 +1,55 @@
+{% extends "base_template.html" %}
+
+{% block title %}
+    {% if item %}Edit Content{% else %}New Content{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>{% if item %}Edit Text Block{% else %}Create Text Block{% endif %}</h2>
+    <hr>
+
+    <form method="post">
+        {{ form.hidden_tag() }}
+
+       <div class="form-group">
+            {{ form.key.label }}<br>
+            <small style="color: #666;">(e.g., hero_title, services_subtitle)</small>
+            {{ form.key(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.description.label }}<br>
+            {{ form.description(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.content.label }}<br>
+            <small style="color: #666;">(You can use HTML tags like &lt;br&gt; or &lt;strong&gt; here)</small>
+            {{ form.content(rows=8, class="form-control") }}
+        </div>
+        
+        <div class="form-group">
+            {{ form.key.label }}<br>
+            {% if item %}
+                <input type="text" value="{{ item.key }}" class="form-control" readonly disabled>
+                <input type="hidden" name="key" value="{{ item.key }}">
+            {% else %}
+              {{ form.key(class="form-control") }}
+            {% endif %}
+        </div>
+
+        <div class="form-actions" style="margin-top: 20px;">
+            {{ form.submit(class="btn btn-primary") }}
+            <a href="{{ url_for('admin.list_content') }}" class="btn btn-outline">Cancel</a>
+        </div>
+    </form>
+
+    {% if item %}
+    <hr style="margin: 30px 0;">
+    <form action="{{ url_for('admin.delete_content', item_id=item.id) }}" method="post">
+        <input type="submit" value="Delete Content Block" class="btn btn-danger" onclick="return confirm('Are you sure?');">
+    </form>
+    {% endif %}
+</div>
+{% endblock %}
