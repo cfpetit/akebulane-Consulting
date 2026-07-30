@@ -151,50 +151,44 @@ window.addEventListener("scroll", function () {
 
 <footer class="site-footer">
     <div class="footer-container">
-        <!-- Column 1: Company Info -->
-        <div class="footer-col company-col">
-            <h3 class="footer-brand">YourCompany</h3>
-            <p class="footer-description">
-                Providing expert international, business, and legal consulting to help your venture grow globally.
+        
+        <!-- Column 1: Brand / Summary -->
+        <div class="footer-col">
+            <h4>{{ texts.get('footer_company_name', 'Akebulan') | safe }}</h4>
+            <p>
+                {{ texts.get('footer_about_text', 'Connecting Europe and Africa through strategic consulting, immigration support, and business development.') | safe }}
             </p>
-            <div class="footer-contact">
-                <p>📍 123 Business Way, Suite 400</p>
-                <p>✉️ contact@yourcompany.com</p>
-                <p>📞 +1 (555) 019-2834</p>
-            </div>
         </div>
 
-        <!-- Column 2: Quick Links -->
+        <!-- Column 2: Navigation Links -->
         <div class="footer-col">
-            <h4>Navigation</h4>
+            <h4>{{ texts.get('footer_nav_heading', 'Quick Links') | safe }}</h4>
             <ul class="footer-links">
-                <li><a href="{{ url_for('public.index') }}">Home</a></li>
-                <li><a href="{{ url_for('contact.contact') }}">Contact</a></li>
+                <li>
+                    <a href="{{ url_for('public.index') }}">
+                        {{ texts.get('footer_link_home', 'Home') | safe }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('contact.contact') }}">
+                        {{ texts.get('footer_link_contact', 'Contact Us') | safe }}
+                    </a>
+                </li>
             </ul>
         </div>
 
-        <!-- Column 4: Social Media -->
+        <!-- Column 3: Contact Info -->
         <div class="footer-col">
-            <h4>Connect</h4>
-            <p class="footer-subtext">Follow us on social media for updates and legal insights.</p>
-            <div class="social-links">
-                <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
-                <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a>
-                <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
-            </div>
+            <h4>{{ texts.get('footer_contact_heading', 'Contact Info') | safe }}</h4>
+            <p><i class="fa-solid fa-location-dot"></i> {{ texts.get('footer_address', 'Madrid, Spain & Nairobi, Kenya') | safe }}</p>
+            <p><i class="fa-solid fa-envelope"></i> {{ texts.get('footer_email', 'info@akebulanconsulting.com') | safe }}</p>
+            <p><i class="fa-solid fa-phone"></i> {{ texts.get('footer_phone', '+34 123 456 789') | safe }}</p>
         </div>
+
     </div>
 
-    <!-- Bottom Bar: Legal & Copyright -->
     <div class="footer-bottom">
-        <div class="footer-bottom-container">
-            <p>&copy; 2026 YourCompany. All rights reserved.</p>
-            <div class="legal-links">
-                <a href="#">Privacy Policy</a>
-                <span class="divider">•</span>
-                <a href="#">Terms of Service</a>
-            </div>
-        </div>
+        <p>{{ texts.get('footer_copyright', '© Akebulan International Consulting. All rights reserved.') | safe }}</p>
     </div>
 </footer>
 

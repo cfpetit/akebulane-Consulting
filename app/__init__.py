@@ -16,28 +16,230 @@ def auto_seed_site_content():
     from app import db
 
     DEFAULT_CONTENTS = [
+    # --- HERO SECTION ---
         {
             "key": "home_hero_title",
-            "description": "Homepage - Main banner headline",
-            "content": "International Consulting<br>for Africa and Europe"
+            "description": "Homepage - Hero Section Headline",
+            "content": "International Consulting<br>for Africa and Europe",
         },
         {
-            "key": "home_hero_subtitle",
-            "description": "Homepage - Paragraph text under the headline",
-            "content": "We provide international consulting, immigration support, market entry strategies and business advisory services connecting Europe and Africa."
+            "key": "home_hero_text",
+            "description": "Homepage - Hero Section Paragraph",
+            "content": "We provide international consulting, immigration support, market entry strategies and business advisory services connecting Europe and Africa.",
         },
+        {
+            "key": "home_hero_btn_contact",
+            "description": "Homepage - Hero Primary Button Text",
+            "content": "Contact Us",
+        },
+        {
+            "key": "home_hero_btn_learn",
+            "description": "Homepage - Hero Secondary Button Text",
+            "content": "Learn More",
+        },
+    # --- SERVICES SECTION ---
         {
             "key": "home_services_title",
-            "description": "Homepage - Heading for Our Services section",
-            "content": "Our Services"
+            "description": "Homepage - Services Section Heading",
+            "content": "Our Services",
         },
         {
+            "key": "home_services_subtitle",
+            "description": "Homepage - Services Section Subtitle",
+            "content": "Supporting businesses, institutions and individuals in building successful connections between Europe and Africa.",
+        },
+    # Service Card 1
+        {
+            "key": "home_services_card1_title",
+            "description": "Homepage - Service Card 1 Title",
+            "content": "Immigration Support",
+        },
+        {
+            "key": "home_services_card1_desc",
+            "description": "Homepage - Service Card 1 Description",
+            "content": "Professional assistance with visas, residence permits, documentation and administrative procedures.",
+        },
+        {
+            "key": "home_services_card1_link",
+            "description": "Homepage - Service Card 1 Link Text",
+            "content": "Learn More →",
+        },
+    # Service Card 2
+        {
+            "key": "home_services_card2_title",
+            "description": "Homepage - Service Card 2 Title",
+            "content": "Business Consulting",
+        },
+        {
+            "key": "home_services_card2_desc",
+            "description": "Homepage - Service Card 2 Description",
+            "content": "Strategic advisory services helping organizations expand, optimize operations and achieve sustainable growth.",
+        },
+        {
+            "key": "home_services_card2_link",
+            "description": "Homepage - Service Card 2 Link Text",
+            "content": "Learn More →",
+        },
+    # Service Card 3
+        {
+            "key": "home_services_card3_title",
+            "description": "Homepage - Service Card 3 Title",
+            "content": "Market Entry Strategies",
+        },
+        {
+            "key": "home_services_card3_desc",
+            "description": "Homepage - Service Card 3 Description",
+            "content": "Market analysis, expansion planning and local expertise for successful entry into African and European markets.",
+        },
+        {
+            "key": "home_services_card3_link",
+            "description": "Homepage - Service Card 3 Link Text",
+            "content": "Learn More →",
+        },
+    # Service Card 4
+        {
+            "key": "home_services_card4_title",
+            "description": "Homepage - Service Card 4 Title",
+            "content": "Strategic Partnerships",
+        },
+        {
+            "key": "home_services_card4_desc",
+            "description": "Homepage - Service Card 4 Description",
+            "content": "Connecting businesses, NGOs and institutions with trusted partners to foster long-term international cooperation.",
+        },
+        {
+            "key": "home_services_card4_link",
+            "description": "Homepage - Service Card 4 Link Text",
+            "content": "Learn More →",
+        },
+    # --- WHY AKEBULAN SECTION ---
+        {
+            "key": "home_why_title",
+            "description": "Homepage - Why Akebulan Heading",
+            "content": "Why Akebulan?",
+        },
+        {
+            "key": "home_why_subtitle",
+            "description": "Homepage - Why Akebulan Subtitle",
+            "content": "At Akebulan International Consulting, we believe successful international projects are built on trust, local knowledge and long-term partnerships.",
+        },
+    # Why Feature 1
+        {
+            "key": "home_why_card1_title",
+            "description": "Homepage - Why Feature 1 Title",
+            "content": "Regional Expertise",
+        },
+        {
+            "key": "home_why_card1_desc",
+            "description": "Homepage - Why Feature 1 Description",
+            "content": "Deep understanding of both African and European markets, allowing us to provide practical and informed guidance.",
+        },
+    # Why Feature 2
+        {
+            "key": "home_why_card2_title",
+            "description": "Homepage - Why Feature 2 Title",
+            "content": "Personalized Consulting",
+        },
+        {
+            "key": "home_why_card2_desc",
+            "description": "Homepage - Why Feature 2 Description",
+            "content": "Every client receives solutions specifically tailored to their objectives, industry and international ambitions.",
+        },
+    # Why Feature 3
+        {
+            "key": "home_why_card3_title",
+            "description": "Homepage - Why Feature 3 Title",
+            "content": "Multilingual Support",
+        },
+        {
+            "key": "home_why_card3_desc",
+            "description": "Homepage - Why Feature 3 Description",
+            "content": "Communication across languages and cultures to simplify international collaboration and business development.",
+        },
+    # Why CTA
+        {
             "key": "home_why_cta_title",
-            "description": "Homepage - Bottom call-to-action headline",
-            "content": "Ready to expand internationally?"
-        }
+            "description": "Homepage - Why Section Call-to-Action Heading",
+            "content": "Ready to expand internationally?",
+        },
+        {
+            "key": "home_why_cta_btn",
+            "description": "Homepage - Why Section Call-to-Action Button",
+            "content": "Contact Us Today",
+        },
+    # --- INSIGHTS & PUBLICATIONS SECTION ---
+        {
+            "key": "home_insights_title",
+            "description": "Homepage - Insights Section Heading",
+            "content": "Insights & Publications",
+        },
+        {
+            "key": "home_insights_subtitle",
+            "description": "Homepage - Insights Section Subtitle",
+            "content": "Expert perspectives on international consulting, immigration, business expansion and African-European cooperation.",
+        },
+        {
+            "key": "home_insights_read_more",
+            "description": "Homepage - Insights Read Article Button Text",
+            "content": "Read Article →",
+        },
+        {
+            "key": "home_insights_view_all",
+            "description": "Homepage - Insights View All Button Text",
+            "content": "View All Publications →",
+        },
+# --- FOOTER SECTION ---
+        {
+            "key": "footer_about_text",
+            "description": "Footer - Brand Description",
+            "content": "Connecting Europe and Africa through strategic consulting, immigration support, and business development.",
+        },
+        {
+            "key": "footer_nav_heading",
+            "description": "Footer - Quick Links Heading",
+            "content": "Quick Links",
+        },
+        {
+            "key": "footer_link_home",
+            "description": "Footer - Home Link Label",
+            "content": "Home",
+        },
+        {
+            "key": "footer_link_contact",
+            "description": "Footer - Contact Link Label",
+            "content": "Contact Us",
+        },
+        {
+            "key": "footer_contact_heading",
+            "description": "Footer - Contact Info Heading",
+            "content": "Contact Info",
+        },
+        {
+            "key": "footer_address",
+            "description": "Footer - Physical Address",
+            "content": "Madrid, Spain & Nairobi, Kenya",
+        },
+        {
+            "key": "footer_email",
+            "description": "Footer - Contact Email",
+            "content": "info@akebulanconsulting.com",
+        },
+        {
+            "key": "footer_phone",
+            "description": "Footer - Phone Number",
+            "content": "+34 123 456 789",
+        },
+        {
+            "key": "footer_copyright",
+            "description": "Footer - Copyright Notice",
+            "content": "© Akebulan International Consulting. All rights reserved.",
+        },
+        {
+            "key": "footer_company_name",
+            "description": "Footer - Company / Brand Name Heading",
+            "content": "Akebulan",
+        },
     ]
-
     try:
         for item in DEFAULT_CONTENTS:
             existing = SiteContent.query.filter_by(key=item["key"]).first()
@@ -83,6 +285,17 @@ def create_app(settings_module):
     app.register_blueprint(contact_bp)
 
     register_error_handlers(app)
+
+    # Inject site texts globally for all Jinja templates
+    @app.context_processor
+    def inject_site_texts():
+        try:
+            from app.models import SiteContent
+            items = SiteContent.get_all()
+            return dict(texts={item.key: item.content for item in items})
+        except Exception:
+            # Fallback if database is not migrated yet
+            return dict(texts={})
 
     with app.app_context():
         auto_seed_site_content()
