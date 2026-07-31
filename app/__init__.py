@@ -486,6 +486,38 @@ def auto_seed_site_content():
             "description": "Footer - Company / Brand Name Heading",
             "content": "Akebulan",
         },
+
+    # --- LEGAL PAGES ---
+        {
+            "key": "terms_title",
+            "description": "Terms of Service - Page Title",
+            "content": "Terms of Service",
+        },
+        {
+            "key": "terms_content",
+            "description": "Terms of Service - Body Content (HTML allowed)",
+            "content": "<h2>1. Terms</h2><p>Terms of service placeholder content. Edit this from your Admin Dashboard.</p>",
+        },
+        {
+            "key": "privacy_title",
+            "description": "Privacy Policy - Page Title",
+            "content": "Privacy Policy",
+        },
+        {
+            "key": "privacy_content",
+            "description": "Privacy Policy - Body Content (HTML allowed)",
+            "content": "<h2>1. Data Protection</h2><p>Privacy policy placeholder content. Edit this from your Admin Dashboard.</p>",
+        },
+        {
+            "key": "cookie_policy_title",
+            "description": "Cookie Policy - Page Title",
+            "content": "Cookie Policy & Declaration",
+        },
+        {
+            "key": "cookie_policy_content",
+            "description": "Cookie Policy - Body Content (HTML allowed)",
+            "content": "<h2>1. Cookie Declaration</h2><p>Cookie policy placeholder content. Edit this from your Admin Dashboard.</p>",
+        },
     ]
     try:
         for item in DEFAULT_CONTENTS:

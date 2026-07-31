@@ -15,8 +15,8 @@
     margin: 0 auto;
     padding: 0 40px 50px 40px;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.5fr;
-    gap: 50px;
+    grid-template-columns: repeat(4,auto);
+    justify-content: space-between;
 }
 
 /* Headings */
@@ -38,6 +38,7 @@
     line-height: 1.7;
     margin-bottom: 20px;
     color: #94a3b8;
+    max-width: 250px;
 }
 
 .footer-contact p {

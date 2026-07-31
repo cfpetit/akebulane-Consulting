@@ -1,0 +1,12 @@
+{% extends "base_template.html" %}
+
+{% block title %}Cookie Policy - Akebulan International Consulting{% endblock %}
+
+{% block content %}
+<section class="legal-container">
+    <h1>{{ texts.get('cookie_policy_title', 'Cookie Policy & Declaration') | safe }}</h1>
+    <div class="legal-body">
+        {{ texts.get('cookie_policy_content', '<p>Cookie policy placeholder content.</p>') | safe }}
+    </div>
+</section>
+{% endblock %}

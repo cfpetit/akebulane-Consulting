@@ -50,3 +50,18 @@ def market_entry():
 def strategic_partnerships():
     """Renders the Strategic Partnerships service detail page."""
     return render_template("public/services/strategic_partnerships.html")
+
+@public_bp.route("/terms-of-service")
+def terms_of_service():
+    """Renders the Terms of Service page."""
+    return render_template("public/terms.html")
+
+@public_bp.route("/privacy-policy")
+def privacy_policy():
+    """Renders the Privacy Policy page."""
+    return render_template("public/privacy.html")
+
+@public_bp.route("/cookie-policy")
+def cookie_policy():
+    """Renders the Cookie Policy and Declaration page."""
+    return render_template("public/cookie_policy.html")

@@ -1,0 +1,12 @@
+{% extends "base_template.html" %}
+
+{% block title %}Terms of Service - Akebulan International Consulting{% endblock %}
+
+{% block content %}
+<section class="legal-container">
+    <h1>{{ texts.get('terms_title', 'Terms of Service') | safe }}</h1>
+    <div class="legal-body">
+        {{ texts.get('terms_content', '<p>Terms placeholder content.</p>') | safe }}
+    </div>
+</section>
+{% endblock %}

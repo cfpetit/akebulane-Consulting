@@ -1,0 +1,12 @@
+{% extends "base_template.html" %}
+
+{% block title %}Privacy Policy - Akebulan International Consulting{% endblock %}
+
+{% block content %}
+<section class="legal-container">
+    <h1>{{ texts.get('privacy_title', 'Privacy Policy') | safe }}</h1>
+    <div class="legal-body">
+        {{ texts.get('privacy_content', '<p>Privacy placeholder content.</p>') | safe }}
+    </div>
+</section>
+{% endblock %}
