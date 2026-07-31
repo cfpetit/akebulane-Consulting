@@ -1,0 +1,65 @@
+{% extends "base_template.html" %}
+
+{% block title %}Business Consulting - Akebulan International Consulting{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>
+            {{ texts.get('business_hero_title', 'Strategic Business Consulting') | safe }}
+        </h1>
+        <p>
+            {{ texts.get('business_hero_subtitle', 'Driving sustainable growth, operational excellence, and international competitiveness for your organization.') | safe }}
+        </p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('contact.contact') }}" class="btn">
+                {{ texts.get('business_cta_btn', 'Schedule a Strategy Session') | safe }}
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Service Overview -->
+<section class="why-akebulan">
+    <div class="section-title">
+        <h2>{{ texts.get('business_overview_title', 'Transforming Vision into Action') | safe }}</h2>
+        <p>
+            {{ texts.get('business_overview_text', 'Whether you are a startup looking to scale or an established enterprise navigating cross-border challenges, our advisory services are tailored to optimize your operations, mitigate risks, and uncover new revenue streams across European and African markets.') | safe }}
+        </p>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="why-grid">
+        <div class="why-card">
+            <i class="fa-solid fa-gears why-icon"></i>
+            <h3>{{ texts.get('business_item1_title', 'Operational Optimization') | safe }}</h3>
+            <p>{{ texts.get('business_item1_desc', 'Streamline processes, reduce overhead costs, and improve overall efficiency to maximize your profitability.') | safe }}</p>
+        </div>
+
+        <div class="why-card">
+            <i class="fa-solid fa-shield-halved why-icon"></i>
+            <h3>{{ texts.get('business_item2_title', 'Risk Management') | safe }}</h3>
+            <p>{{ texts.get('business_item2_desc', 'Identify, assess, and develop comprehensive strategies to mitigate financial, operational, and market risks.') | safe }}</p>
+        </div>
+
+        <div class="why-card">
+            <i class="fa-solid fa-chart-line why-icon"></i>
+            <h3>{{ texts.get('business_item3_title', 'Growth & Strategy') | safe }}</h3>
+            <p>{{ texts.get('business_item3_desc', 'Data-driven strategic planning to help you capture new market share, innovate products, and outpace the competition.') | safe }}</p>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="why-cta">
+        <h3>
+            {{ texts.get('business_cta_title', 'Ready to elevate your business performance?') | safe }}
+        </h3>
+        <a href="{{ url_for('contact.contact') }}" class="btn">
+            {{ texts.get('business_cta_btn', 'Schedule a Strategy Session') | safe }}
+        </a>
+    </div>
+</section>
+
+{% endblock %}

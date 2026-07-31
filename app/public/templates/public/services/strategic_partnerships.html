@@ -1,0 +1,65 @@
+{% extends "base_template.html" %}
+
+{% block title %}Strategic Partnerships - Akebulan International Consulting{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>
+            {{ texts.get('partnerships_hero_title', 'Strategic Partnerships') | safe }}
+        </h1>
+        <p>
+            {{ texts.get('partnerships_hero_subtitle', 'Forging high-value alliances between European and African organizations for mutual growth and sustainable impact.') | safe }}
+        </p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('contact.contact') }}" class="btn">
+                {{ texts.get('partnerships_cta_btn', 'Explore Partnership Opportunities') | safe }}
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Service Overview -->
+<section class="why-akebulan">
+    <div class="section-title">
+        <h2>{{ texts.get('partnerships_overview_title', 'Connecting the Right Stakeholders') | safe }}</h2>
+        <p>
+            {{ texts.get('partnerships_overview_text', 'Building the right relationships is critical to international success. We leverage our extensive network to connect businesses, NGOs, and public institutions with trusted local and global partners, fostering long-term cooperation and shared value.') | safe }}
+        </p>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="why-grid">
+        <div class="why-card">
+            <i class="fa-solid fa-users-viewfinder why-icon"></i>
+            <h3>{{ texts.get('partnerships_item1_title', 'Partner Identification') | safe }}</h3>
+            <p>{{ texts.get('partnerships_item1_desc', 'Rigorous vetting and selection of potential local partners, distributors, suppliers, and joint venture candidates.') | safe }}</p>
+        </div>
+
+        <div class="why-card">
+            <i class="fa-solid fa-handshake-angle why-icon"></i>
+            <h3>{{ texts.get('partnerships_item2_title', 'Negotiation & Structuring') | safe }}</h3>
+            <p>{{ texts.get('partnerships_item2_desc', 'Expert facilitation of partnership agreements, ensuring fair, compliant, and mutually beneficial frameworks.') | safe }}</p>
+        </div>
+
+        <div class="why-card">
+            <i class="fa-solid fa-building-columns why-icon"></i>
+            <h3>{{ texts.get('partnerships_item3_title', 'Institutional Alliances') | safe }}</h3>
+            <p>{{ texts.get('partnerships_item3_desc', 'Bridging the gap between private enterprises, public institutions, NGOs, and international trade organizations.') | safe }}</p>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="why-cta">
+        <h3>
+            {{ texts.get('partnerships_cta_title', 'Looking for the right international partner?') | safe }}
+        </h3>
+        <a href="{{ url_for('contact.contact') }}" class="btn">
+            {{ texts.get('partnerships_cta_btn', 'Explore Partnership Opportunities') | safe }}
+        </a>
+    </div>
+</section>
+
+{% endblock %}

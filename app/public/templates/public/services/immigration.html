@@ -1,0 +1,65 @@
+{% extends "base_template.html" %}
+
+{% block title %}Immigration Support - Akebulan International Consulting{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>
+            {{ texts.get('immigration_hero_title', 'Professional Immigration & Residency Support') | safe }}
+        </h1>
+        <p>
+            {{ texts.get('immigration_hero_subtitle', 'Streamlining visa applications, residency permits, and administrative procedures between Europe and Africa.') | safe }}
+        </p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('contact.contact') }}" class="btn">
+                {{ texts.get('immigration_cta_btn', 'Request Immigration Consultation') | safe }}
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Service Overview -->
+<section class="why-akebulan">
+    <div class="section-title">
+        <h2>{{ texts.get('immigration_overview_title', 'Navigating Cross-Border Mobility') | safe }}</h2>
+        <p>
+            {{ texts.get('immigration_overview_text', 'International regulations and administrative requirements can be complex and time-consuming. We provide personalized, legal, and operational guidance to ensure individuals, corporate teams, and investors secure the proper authorization smoothly and in full compliance with local laws.') | safe }}
+        </p>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="why-grid">
+        <div class="why-card">
+            <i class="fa-solid fa-passport why-icon"></i>
+            <h3>{{ texts.get('immigration_item1_title', 'Visas & Work Permits') | safe }}</h3>
+            <p>{{ texts.get('immigration_item1_desc', 'End-to-end management for business visas, highly qualified worker permits, and investor mobility frameworks.') | safe }}</p>
+        </div>
+
+        <div class="why-card">
+            <i class="fa-solid fa-id-card why-icon"></i>
+            <h3>{{ texts.get('immigration_item2_title', 'Residency Permits') | safe }}</h3>
+            <p>{{ texts.get('immigration_item2_desc', 'Assistance with initial residency filings, renewals, family reunification, and long-term stay authorizations.') | safe }}</p>
+        </div>
+
+        <div class="why-card">
+            <i class="fa-solid fa-plane-departure why-icon"></i>
+            <h3>{{ texts.get('immigration_item3_title', 'Corporate Relocation') | safe }}</h3>
+            <p>{{ texts.get('immigration_item3_desc', 'Strategic mobility solutions for companies transferring executives, specialists, or entire project teams abroad.') | safe }}</p>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="why-cta">
+        <h3>
+            {{ texts.get('immigration_cta_title', 'Require Expert Guidance for Your Visa or Residency?') | safe }}
+        </h3>
+        <a href="{{ url_for('contact.contact') }}" class="btn">
+            {{ texts.get('immigration_cta_btn', 'Request Immigration Consultation') | safe }}
+        </a>
+    </div>
+</section>
+
+{% endblock %}

@@ -112,6 +112,253 @@ def auto_seed_site_content():
             "description": "Homepage - Service Card 4 Link Text",
             "content": "Learn More →",
         },
+    # --- IMMIGRATION SERVICE PAGE ---
+        {
+            "key": "immigration_hero_title",
+            "description": "Immigration Page - Hero Title",
+            "content": "Professional Immigration & Residency Support",
+        },
+        {
+            "key": "immigration_hero_subtitle",
+            "description": "Immigration Page - Hero Subtitle",
+            "content": "Streamlining visa applications, residency permits, and administrative procedures between Europe and Africa.",
+        },
+        {
+            "key": "immigration_overview_title",
+            "description": "Immigration Page - Overview Section Title",
+            "content": "Navigating Cross-Border Mobility",
+        },
+        {
+            "key": "immigration_overview_text",
+            "description": "Immigration Page - Overview Paragraph",
+            "content": "International regulations and administrative requirements can be complex and time-consuming. We provide personalized, legal, and operational guidance to ensure individuals, corporate teams, and investors secure the proper authorization smoothly and in full compliance with local laws.",
+        },
+        {
+            "key": "immigration_item1_title",
+            "description": "Immigration Page - Feature 1 Title",
+            "content": "Visas & Work Permits",
+        },
+        {
+            "key": "immigration_item1_desc",
+            "description": "Immigration Page - Feature 1 Description",
+            "content": "End-to-end management for business visas, highly qualified worker permits, and investor mobility frameworks.",
+        },
+        {
+            "key": "immigration_item2_title",
+            "description": "Immigration Page - Feature 2 Title",
+            "content": "Residency Permits",
+        },
+        {
+            "key": "immigration_item2_desc",
+            "description": "Immigration Page - Feature 2 Description",
+            "content": "Assistance with initial residency filings, renewals, family reunification, and long-term stay authorizations.",
+        },
+        {
+            "key": "immigration_item3_title",
+            "description": "Immigration Page - Feature 3 Title",
+            "content": "Corporate Relocation",
+        },
+        {
+            "key": "immigration_item3_desc",
+            "description": "Immigration Page - Feature 3 Description",
+            "content": "Strategic mobility solutions for companies transferring executives, specialists, or entire project teams abroad.",
+        },
+        {
+            "key": "immigration_cta_title",
+            "description": "Immigration Page - Bottom CTA Title",
+            "content": "Require Expert Guidance for Your Visa or Residency?",
+        },
+        {
+            "key": "immigration_cta_btn",
+            "description": "Immigration Page - Bottom CTA Button",
+            "content": "Request Immigration Consultation",
+        },
+
+    # --- BUSINESS CONSULTING SERVICE PAGE ---
+        {
+            "key": "business_hero_title",
+            "description": "Business Page - Hero Title",
+            "content": "Strategic Business Consulting",
+        },
+        {
+            "key": "business_hero_subtitle",
+            "description": "Business Page - Hero Subtitle",
+            "content": "Driving sustainable growth, operational excellence, and international competitiveness for your organization.",
+        },
+        {
+            "key": "business_overview_title",
+            "description": "Business Page - Overview Section Title",
+            "content": "Transforming Vision into Action",
+        },
+        {
+            "key": "business_overview_text",
+            "description": "Business Page - Overview Paragraph",
+            "content": "Whether you are a startup looking to scale or an established enterprise navigating cross-border challenges, our advisory services are tailored to optimize your operations, mitigate risks, and uncover new revenue streams across European and African markets.",
+        },
+        {
+            "key": "business_item1_title",
+            "description": "Business Page - Feature 1 Title",
+            "content": "Operational Optimization",
+        },
+        {
+            "key": "business_item1_desc",
+            "description": "Business Page - Feature 1 Description",
+            "content": "Streamline processes, reduce overhead costs, and improve overall efficiency to maximize your profitability.",
+        },
+        {
+            "key": "business_item2_title",
+            "description": "Business Page - Feature 2 Title",
+            "content": "Risk Management",
+        },
+        {
+            "key": "business_item2_desc",
+            "description": "Business Page - Feature 2 Description",
+            "content": "Identify, assess, and develop comprehensive strategies to mitigate financial, operational, and market risks.",
+        },
+        {
+            "key": "business_item3_title",
+            "description": "Business Page - Feature 3 Title",
+            "content": "Growth & Strategy",
+        },
+        {
+            "key": "business_item3_desc",
+            "description": "Business Page - Feature 3 Description",
+            "content": "Data-driven strategic planning to help you capture new market share, innovate products, and outpace the competition.",
+        },
+        {
+            "key": "business_cta_title",
+            "description": "Business Page - Bottom CTA Title",
+            "content": "Ready to elevate your business performance?",
+        },
+        {
+            "key": "business_cta_btn",
+            "description": "Business Page - Bottom CTA Button",
+            "content": "Schedule a Strategy Session",
+        },
+
+    # --- MARKET ENTRY SERVICE PAGE ---
+        {
+            "key": "market_hero_title",
+            "description": "Market Entry Page - Hero Title",
+            "content": "Market Entry Strategies",
+        },
+        {
+            "key": "market_hero_subtitle",
+            "description": "Market Entry Page - Hero Subtitle",
+            "content": "Confidently expand your business footprint across African and European markets with data-driven insights and local expertise.",
+        },
+        {
+            "key": "market_overview_title",
+            "description": "Market Entry Page - Overview Section Title",
+            "content": "Your Bridge to New Markets",
+        },
+        {
+            "key": "market_overview_text",
+            "description": "Market Entry Page - Overview Paragraph",
+            "content": "Entering a new country requires more than just capital; it requires deep local knowledge, cultural intelligence, and regulatory foresight. We guide you through every phase of your expansion to ensure a successful, profitable, and compliant market launch.",
+        },
+        {
+            "key": "market_item1_title",
+            "description": "Market Entry Page - Feature 1 Title",
+            "content": "Market Research & Feasibility",
+        },
+        {
+            "key": "market_item1_desc",
+            "description": "Market Entry Page - Feature 1 Description",
+            "content": "Comprehensive analysis of market demand, competitor landscapes, and economic indicators to validate your expansion plans.",
+        },
+        {
+            "key": "market_item2_title",
+            "description": "Market Entry Page - Feature 2 Title",
+            "content": "Regulatory & Compliance",
+        },
+        {
+            "key": "market_item2_desc",
+            "description": "Market Entry Page - Feature 2 Description",
+            "content": "Navigating local corporate laws, tax frameworks, and industry-specific regulations to ensure your operations are fully compliant.",
+        },
+        {
+            "key": "market_item3_title",
+            "description": "Market Entry Page - Feature 3 Title",
+            "content": "Localization & Go-To-Market",
+        },
+        {
+            "key": "market_item3_desc",
+            "description": "Market Entry Page - Feature 3 Description",
+            "content": "Tailoring your value proposition, pricing strategies, and marketing channels to resonate with local consumers and stakeholders.",
+        },
+        {
+            "key": "market_cta_title",
+            "description": "Market Entry Page - Bottom CTA Title",
+            "content": "Planning an international expansion?",
+        },
+        {
+            "key": "market_cta_btn",
+            "description": "Market Entry Page - Bottom CTA Button",
+            "content": "Discuss Your Expansion Goals",
+        },
+
+     # --- STRATEGIC PARTNERSHIPS SERVICE PAGE ---
+        {
+            "key": "partnerships_hero_title",
+            "description": "Partnerships Page - Hero Title",
+            "content": "Strategic Partnerships",
+        },
+        {
+            "key": "partnerships_hero_subtitle",
+            "description": "Partnerships Page - Hero Subtitle",
+            "content": "Forging high-value alliances between European and African organizations for mutual growth and sustainable impact.",
+        },
+        {
+            "key": "partnerships_overview_title",
+            "description": "Partnerships Page - Overview Section Title",
+            "content": "Connecting the Right Stakeholders",
+        },
+        {
+            "key": "partnerships_overview_text",
+            "description": "Partnerships Page - Overview Paragraph",
+            "content": "Building the right relationships is critical to international success. We leverage our extensive network to connect businesses, NGOs, and public institutions with trusted local and global partners, fostering long-term cooperation and shared value.",
+        },
+        {
+            "key": "partnerships_item1_title",
+            "description": "Partnerships Page - Feature 1 Title",
+            "content": "Partner Identification",
+        },
+        {
+            "key": "partnerships_item1_desc",
+            "description": "Partnerships Page - Feature 1 Description",
+            "content": "Rigorous vetting and selection of potential local partners, distributors, suppliers, and joint venture candidates.",
+        },
+        {
+            "key": "partnerships_item2_title",
+            "description": "Partnerships Page - Feature 2 Title",
+            "content": "Negotiation & Structuring",
+        },
+        {
+            "key": "partnerships_item2_desc",
+            "description": "Partnerships Page - Feature 2 Description",
+            "content": "Expert facilitation of partnership agreements, ensuring fair, compliant, and mutually beneficial frameworks.",
+        },
+        {
+            "key": "partnerships_item3_title",
+            "description": "Partnerships Page - Feature 3 Title",
+            "content": "Institutional Alliances",
+        },
+        {
+            "key": "partnerships_item3_desc",
+            "description": "Partnerships Page - Feature 3 Description",
+            "content": "Bridging the gap between private enterprises, public institutions, NGOs, and international trade organizations.",
+        },
+        {
+            "key": "partnerships_cta_title",
+            "description": "Partnerships Page - Bottom CTA Title",
+            "content": "Looking for the right international partner?",
+        },
+        {
+            "key": "partnerships_cta_btn",
+            "description": "Partnerships Page - Bottom CTA Button",
+            "content": "Explore Partnership Opportunities",
+        },
     # --- WHY AKEBULAN SECTION ---
         {
             "key": "home_why_title",

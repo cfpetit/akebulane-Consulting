@@ -1,0 +1,65 @@
+{% extends "base_template.html" %}
+
+{% block title %}Market Entry Strategies - Akebulan International Consulting{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>
+            {{ texts.get('market_hero_title', 'Market Entry Strategies') | safe }}
+        </h1>
+        <p>
+            {{ texts.get('market_hero_subtitle', 'Confidently expand your business footprint across African and European markets with data-driven insights and local expertise.') | safe }}
+        </p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('contact.contact') }}" class="btn">
+                {{ texts.get('market_cta_btn', 'Discuss Your Expansion Goals') | safe }}
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Service Overview -->
+<section class="why-akebulan">
+    <div class="section-title">
+        <h2>{{ texts.get('market_overview_title', 'Your Bridge to New Markets') | safe }}</h2>
+        <p>
+            {{ texts.get('market_overview_text', 'Entering a new country requires more than just capital; it requires deep local knowledge, cultural intelligence, and regulatory foresight. We guide you through every phase of your expansion to ensure a successful, profitable, and compliant market launch.') | safe }}
+        </p>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="why-grid">
+        <div class="why-card">
+            <i class="fa-solid fa-map-location-dot why-icon"></i>
+            <h3>{{ texts.get('market_item1_title', 'Market Research & Feasibility') | safe }}</h3>
+            <p>{{ texts.get('market_item1_desc', 'Comprehensive analysis of market demand, competitor landscapes, and economic indicators to validate your expansion plans.') | safe }}</p>
+        </div>
+
+        <div class="why-card">
+            <i class="fa-solid fa-scale-balanced why-icon"></i>
+            <h3>{{ texts.get('market_item2_title', 'Regulatory & Compliance') | safe }}</h3>
+            <p>{{ texts.get('market_item2_desc', 'Navigating local corporate laws, tax frameworks, and industry-specific regulations to ensure your operations are fully compliant.') | safe }}</p>
+        </div>
+
+        <div class="why-card">
+            <i class="fa-solid fa-bullseye why-icon"></i>
+            <h3>{{ texts.get('market_item3_title', 'Localization & Go-To-Market') | safe }}</h3>
+            <p>{{ texts.get('market_item3_desc', 'Tailoring your value proposition, pricing strategies, and marketing channels to resonate with local consumers and stakeholders.') | safe }}</p>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="why-cta">
+        <h3>
+            {{ texts.get('market_cta_title', 'Planning an international expansion?') | safe }}
+        </h3>
+        <a href="{{ url_for('contact.contact') }}" class="btn">
+            {{ texts.get('market_cta_btn', 'Discuss Your Expansion Goals') | safe }}
+        </a>
+    </div>
+</section>
+
+{% endblock %}

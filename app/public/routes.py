@@ -30,3 +30,23 @@ def show_post(slug):
     if post is None:
         abort(404)
     return render_template("public/post_view.html", post=post)
+
+@public_bp.route("/services/immigration-support")
+def immigration_support():
+    """Renders the Immigration Support service detail page."""
+    return render_template("public/services/immigration.html")
+
+@public_bp.route("/services/business-consulting")
+def business_consulting():
+    """Renders the Business Consulting service detail page."""
+    return render_template("public/services/business_consulting.html")
+
+@public_bp.route("/services/market-entry")
+def market_entry():
+    """Renders the Market Entry Strategies service detail page."""
+    return render_template("public/services/market_entry.html")
+
+@public_bp.route("/services/strategic-partnerships")
+def strategic_partnerships():
+    """Renders the Strategic Partnerships service detail page."""
+    return render_template("public/services/strategic_partnerships.html")
