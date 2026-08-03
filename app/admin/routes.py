@@ -59,18 +59,16 @@ def contact_detail(id):
 
 @admin_bp.route("/contacts/delete/<int:id>", methods=["POST"])
 @login_required
+@admin_required
 def delete_contact(id):
 
     if not current_user.is_admin:
         abort(403)
 
-    message = ContactMessage.get_by_id(id)
-
-    if message:
-        message.delete()
-
-    flash("Message deleted successfully.")
-
+    message = ContactMessage.query.get_or_404(id)
+    db.session.delete(message)
+    db.session.commit()
+    flash("Message deleted successfully.", "success")
     return redirect(url_for("admin.contacts"))
 
 @admin_bp.route("/admin/users")

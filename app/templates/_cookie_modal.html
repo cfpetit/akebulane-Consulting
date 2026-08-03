@@ -1,0 +1,51 @@
+<div id="consentModal" class="consent-modal-overlay">
+    <div class="consent-modal-card">
+        
+        <div class="consent-header">
+            <h2>{{ texts.get('consent_title', 'Terms & Privacy Preferences') | safe }}</h2>
+            <p>{{ texts.get('consent_subtitle', 'Please review and accept our policies before continuing to browse our website.') | safe }}</p>
+        </div>
+
+        <div class="consent-accordions">
+            <!-- Dropdown 1: Cookie Policy -->
+            <details class="consent-accordion">
+                <summary>
+                    <span><i class="fa-solid fa-cookie-bite"></i> Cookie Policy</span>
+                    <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+                </summary>
+                <div class="accordion-content">
+                    {{ texts.get('cookie_policy_content', '') | safe }}
+                </div>
+            </details>
+
+            <!-- Dropdown 2: Terms of Service -->
+            <details class="consent-accordion">
+                <summary>
+                    <span><i class="fa-solid fa-file-contract"></i> Terms of Service</span>
+                    <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+                </summary>
+                <div class="accordion-content">
+                    {{ texts.get('terms_content', '') | safe }}
+                </div>
+            </details>
+
+            <!-- Dropdown 3: Privacy Policy -->
+            <details class="consent-accordion">
+                <summary>
+                    <span><i class="fa-solid fa-user-shield"></i> Privacy Policy</span>
+                    <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+                </summary>
+                <div class="accordion-content">
+                    {{ texts.get('privacy_content', '') | safe }}
+                </div>
+            </details>
+        </div>
+
+        <div class="consent-footer">
+            <button id="acceptConsentBtn" class="btn-accept-all">
+                {{ texts.get('consent_btn_accept', 'Accept & Continue') | safe }}
+            </button>
+        </div>
+
+    </div>
+</div>

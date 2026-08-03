@@ -1,5 +1,25 @@
-{% extends 'base_template.html' %}
+{% extends "base_template.html" %}
+
+{% block title %}Server Error (500){% endblock %}
 
 {% block content %}
-    Ooops!! Parece que ha habido un error :(
+<link rel="stylesheet" href="{{ url_for('static', filename='css/errors.css') }}">
+
+<section class="error-container">
+    <div class="error-card">
+        <div class="error-code error-code-500">500</div>
+        <h1 class="error-title">Unexpected Error</h1>
+        <p class="error-message">
+            Something went wrong on our end. Our servers ran into an internal glitch, but we've been notified. Please try refreshing the page.
+        </p>
+        <div class="error-actions">
+            <a href="{{ url_for('public.index') }}" class="btn-error-primary">
+                Return to Home
+            </a>
+            <button onclick="window.location.reload();" class="btn-error-secondary">
+                Refresh Page
+            </button>
+        </div>
+    </div>
+</section>
 {% endblock %}

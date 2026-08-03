@@ -7,6 +7,7 @@
         <p style="color: red;"><strong>Error:</strong> {{ error }}
     {% endif %}
     <form action="" method="post" novalidate>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         {{ form.hidden_tag() }}
         <div>
             {{ form.name.label }}

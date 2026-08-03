@@ -249,3 +249,20 @@
     padding: 6px 14px;
     font-size: 0.85rem;
 }
+
+
+/* Quill Editor Custom Styling */
+.quill-editor-container {
+    background: #ffffff;
+    min-height: 150px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.ql-toolbar {
+    background: #f8fafc;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}

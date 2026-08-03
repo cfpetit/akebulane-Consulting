@@ -5,11 +5,50 @@
 {% endblock %}
 
 {% block content %}
+
+<!-- Quill CSS -->
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+
+<!-- Quill JS & Initialization -->
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('textarea').forEach(textarea => {
+      const editorDiv = document.createElement('div');
+      editorDiv.className = 'quill-editor-container';
+      editorDiv.style.minHeight = '150px';
+      editorDiv.style.background = '#ffffff';
+      
+      textarea.parentNode.insertBefore(editorDiv, textarea);
+      textarea.style.display = 'none';
+      const quill = new Quill(editorDiv, {
+        theme: 'snow',
+        modules: {
+          toolbar: [
+            [{ 'header': [2, 3, false] }],
+            ['bold', 'italic', 'underline'],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            ['link', 'clean']
+          ]
+        }
+      });
+      if (textarea.value) {
+        quill.clipboard.dangerouslyPasteHTML(textarea.value);
+      }
+      quill.on('text-change', () => {
+        textarea.value = quill.root.innerHTML;
+      });
+    });
+  });
+</script>
+
+
 <div class="form-container">
     <h2>{% if item %}Edit Text Block{% else %}Create Text Block{% endif %}</h2>
     <hr>
 
-    <form method="post">
+    <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         {{ form.hidden_tag() }}
 
        <div class="form-group">
@@ -25,7 +64,6 @@
 
         <div class="form-group">
             {{ form.content.label }}<br>
-            <small style="color: #666;">(You can use HTML tags like &lt;br&gt; or &lt;strong&gt; here)</small>
             {{ form.content(rows=8, class="form-control") }}
         </div>
         

@@ -3,12 +3,14 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
+from flask_wtf.csrf import CSRFProtect
 import logging
 
 login_manager = LoginManager()
 db = SQLAlchemy()
 migrate = Migrate()
 mail = Mail()
+csrf = CSRFProtect()
 
 def auto_seed_site_content():
     """Auto-populates missing default content on server startup."""
@@ -550,6 +552,8 @@ def create_app(settings_module):
     migrate.init_app(app,db)
     mail.init_app(app)
 
+    csrf.init_app(app)
+
     # Registro de los Blueprints
     from .auth import auth_bp
     app.register_blueprint(auth_bp)
@@ -593,6 +597,10 @@ def register_error_handlers(app):
     @app.errorhandler(403)
     def base_error_handler(e):
         return render_template('403.html'), 403
+
+    @app.errorhandler(400)
+    def base_error_handler(e):
+        return render_template('400.html'), 400
 
 
 def configure_logging(app):

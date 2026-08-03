@@ -1,72 +1,208 @@
 {% extends "base_template.html" %}
 
-{% block title %}
-Contact Message
-{% endblock %}
+{% block title %}Contact Message Details{% endblock %}
 
 {% block content %}
+<style>
+    /* Message Detail Card */
+    .detail-card {
+        background: #ffffff;
+        padding: 32px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 40px auto;
+    }
+    .detail-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 16px;
+        margin-bottom: 20px;
+    }
+    .detail-header h2 {
+        margin: 0;
+        color: #0f172a;
+        font-size: 1.5rem;
+    }
+    .detail-date {
+        color: #64748b;
+        font-size: 0.9rem;
+    }
+    .detail-meta {
+        margin-bottom: 24px;
+        color: #334155;
+        font-size: 1rem;
+    }
+    .detail-meta p {
+        margin: 4px 0;
+    }
+    .detail-body {
+        background: #f8fafc;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        color: #1e293b;
+        line-height: 1.6;
+        white-space: pre-line;
+        margin-bottom: 30px;
+        min-height: 120px;
+    }
+    .detail-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-<section class="admin-page">
+    /* Buttons */
+    .btn-back {
+        display: inline-block;
+        padding: 8px 18px;
+        background-color: #64748b;
+        color: #ffffff !important;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: background-color 0.2s ease;
+    }
+    .btn-back:hover {
+        background-color: #475569;
+    }
 
-    <h1>{{ message.subject }}</h1>
+    /* Custom Modal */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(4px);
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+    .modal-overlay.active {
+        display: flex;
+    }
+    .modal-card {
+        background: #ffffff;
+        padding: 28px;
+        border-radius: 12px;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+    }
+    .modal-icon {
+        font-size: 2.2rem;
+        color: #ef4444;
+        margin-bottom: 12px;
+    }
+    .modal-card h3 {
+        margin: 0 0 8px 0;
+        color: #0f172a;
+        font-size: 1.25rem;
+    }
+    .modal-card p {
+        color: #64748b;
+        font-size: 0.95rem;
+        margin-bottom: 24px;
+        line-height: 1.5;
+    }
+    .modal-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+    }
+    .btn-modal-cancel {
+        padding: 8px 18px;
+        background: #f1f5f9;
+        color: #475569;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .btn-modal-confirm {
+        padding: 8px 18px;
+        background: #ef4444;
+        color: #ffffff;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+</style>
 
-    <p>
+<section class="admin-container">
+    <div class="detail-card">
+        <div class="detail-header">
+            <h2>{{ message.subject }}</h2>
+            <span class="detail-date">{{ message.created.strftime("%d/%m/%Y %H:%M") }}</span>
+        </div>
 
-        <strong>Name:</strong>
-        {{ message.name }}
+        <div class="detail-meta">
+            <p><strong>Name:</strong> {{ message.name }}</p>
+            <p><strong>Email:</strong> <a href="mailto:{{ message.email }}">{{ message.email }}</a></p>
+        </div>
 
-    </p>
+        <div class="detail-body">
+            {{ message.message }}
+        </div>
 
-    <p>
+        <div class="detail-actions">
+            <a href="{{ url_for('admin.contacts') }}" class="btn-back">
+                ← Back to Messages
+            </a>
 
-        <strong>Email:</strong>
-        {{ message.email }}
-
-    </p>
-
-    <p>
-
-        <strong>Company:</strong>
-        {{ message.company or "-" }}
-
-    </p>
-
-    <p>
-
-        <strong>Phone:</strong>
-        {{ message.phone or "-" }}
-
-    </p>
-
-    <p>
-
-        <strong>Date:</strong>
-
-        {{ message.created.strftime("%d/%m/%Y %H:%M") }}
-
-    </p>
-
-    <hr>
-
-    <p>
-
-        {{ message.message }}
-
-    </p>
-
-    <br>
-
-    <form method="POST"
-          action="{{ url_for('admin.delete_contact', id=message.id) }}">
-
-        <button class="btn btn-danger">
-
-            Delete message
-
-        </button>
-
-    </form>
-
+            <form action="{{ url_for('admin.delete_contact', id=message.id) }}" 
+                  method="POST" 
+                  onsubmit="return openDeleteModal(event, this);">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <button type="submit" class="btn-danger">Delete Message</button>
+            </form>
+        </div>
+    </div>
 </section>
 
+<!-- Custom Modal -->
+<div id="deleteModal" class="modal-overlay">
+    <div class="modal-card">
+        <div class="modal-icon">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <h3>Confirm Deletion</h3>
+        <p>Are you sure you want to delete this message? This action cannot be undone.</p>
+        <div class="modal-actions">
+            <button type="button" class="btn-modal-cancel" onclick="closeDeleteModal()">Cancel</button>
+            <button type="button" class="btn-modal-confirm" id="confirmDeleteBtn">Delete</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let activeForm = null;
+
+    function openDeleteModal(event, form) {
+        event.preventDefault();
+        activeForm = form;
+        document.getElementById('deleteModal').classList.add('active');
+        return false;
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.remove('active');
+        activeForm = null;
+    }
+
+    document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
+        if (activeForm) {
+            activeForm.submit();
+        }
+    });
+</script>
 {% endblock %}
