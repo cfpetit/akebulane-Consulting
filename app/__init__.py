@@ -536,6 +536,33 @@ def auto_seed_site_content():
     except Exception:
         db.session.rollback()
 
+def auto_seed_admin_user():
+    """Auto-populates an initial admin user on server startup if it does not exist."""
+    import os
+    from werkzeug.security import generate_password_hash
+    from app.models import User
+    from app import db
+
+    # Pull credentials from Render environment variables, or fallback to these defaults:
+    admin_email = os.getenv('DEFAULT_ADMIN_EMAIL', 'admin@akebulanconsulting.com')
+    admin_password = os.getenv('DEFAULT_ADMIN_PASSWORD', 'AdminPass2026!')
+
+    try:
+        # Check if an admin user with this email already exists
+        existing_admin = User.query.filter_by(email=admin_email).first()
+        if not existing_admin:
+            # Create the default admin
+            admin_user = User(
+                email=admin_email,
+                username='admin',
+                password=generate_password_hash(admin_password),
+                is_admin=True  # Ensure this matches your User model's admin column/field name
+            )
+            db.session.add(admin_user)
+            db.session.commit()
+    except Exception:
+        db.session.rollback()
+
 def create_app(settings_module):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(settings_module)
@@ -583,6 +610,12 @@ def create_app(settings_module):
 
     with app.app_context():
         auto_seed_site_content()
+
+        # Update this block at the end of create_app()
+    with app.app_context():
+        auto_seed_site_content()
+        auto_seed_admin_user()  # <-- ADD THIS LINE
+
 
     return app
 
