@@ -70,7 +70,7 @@ def login():
     return render_template('auth/login_form.html', form=form)
 
 
-@auth_bp.route('/logout')
+@auth_bp.route('/logout', methods=['GET', 'POST'])
 def logout():
     logout_user()
     return redirect(url_for('public.index'))

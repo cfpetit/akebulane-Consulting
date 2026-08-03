@@ -10,7 +10,6 @@
 
     <title>{% block title %}{% endblock %}</title>
 
-
     <link rel="icon" href="data: ,">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -107,12 +106,10 @@
             {% endif %}
 
             <span class="username">
-
                 {{ current_user.name }}
-
             </span>
 
-            <a href="{{ url_for('auth.logout') }}">
+            <a href="{{ url_for('auth.logout') }}" onclick="openLogoutModal(event);">
                 Logout
             </a>
 
@@ -127,30 +124,6 @@
     {% block content %}{% endblock %}
 
 </main>
-
-<footer class="footer">
-
-    <div class="footer-content">
-
-<script>
-
-window.addEventListener("scroll", function () {
-
-    const navbar = document.querySelector(".navbar");
-
-    if (window.scrollY > 60) {
-
-        navbar.classList.add("scrolled");
-
-    } else {
-
-        navbar.classList.remove("scrolled");
-
-    }
-
-});
-
-</script>
 
 <footer class="site-footer">
     <div class="footer-container">
@@ -188,9 +161,7 @@ window.addEventListener("scroll", function () {
             <p><i class="fa-solid fa-phone"></i> {{ texts.get('footer_phone', '+34 123 456 789') | safe }}</p>
         </div>
 
-    
-
-    <!-- Footer Legal Column -->
+        <!-- Column 4: Legal Links -->
         <div class="footer-col">
             <h4>{{ texts.get('footer_legal_title', 'Legal') | safe }}</h4>
             <ul class="footer-links">
@@ -217,9 +188,46 @@ window.addEventListener("scroll", function () {
     </div>
 </footer>
 
-    {% include "_cookie_modal.html" %}
+{% include "_cookie_modal.html" %}
 
-    <script src="{{ url_for('static', filename='js/cookie_modal.js') }}"></script>
+<div id="logoutModal" class="modal-overlay">
+    <div class="modal-card">
+        <div class="modal-icon">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </div>
+        <h3>Confirm Logout</h3>
+        <p>Are you sure you want to log out of your account?</p>
+        <div class="modal-actions">
+            <button type="button" class="btn-modal-cancel" onclick="closeLogoutModal()">Cancel</button>
+            <form action="{{ url_for('auth.logout') }}" method="POST" style="margin: 0;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <button type="submit" class="btn-modal-confirm">Log Out</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/cookie_modal.js') }}"></script>
+
+<script>
+window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".navbar");
+    if (window.scrollY > 60) {
+        navbar.classList.add("scrolled");
+    } else {
+        navbar.classList.remove("scrolled");
+    }
+});
+
+function openLogoutModal(event) {
+    if (event) event.preventDefault();
+    document.getElementById('logoutModal').classList.add('active');
+}
+
+function closeLogoutModal() {
+    document.getElementById('logoutModal').classList.remove('active');
+}
+</script>
 
 </body>
 
