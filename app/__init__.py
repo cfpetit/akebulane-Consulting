@@ -539,29 +539,33 @@ def auto_seed_site_content():
 def auto_seed_admin_user():
     """Auto-populates an initial admin user on server startup if it does not exist."""
     import os
-    from werkzeug.security import generate_password_hash
     from app.auth.models import User
     from app import db
 
-    # Pull credentials from Render environment variables, or fallback to these defaults:
+    admin_name = os.getenv('DEFAULT_ADMIN_NAME', 'Admin')
     admin_email = os.getenv('DEFAULT_ADMIN_EMAIL', 'admin@akebulanconsulting.com')
     admin_password = os.getenv('DEFAULT_ADMIN_PASSWORD', 'AdminPass2026!')
 
     try:
-        # Check if an admin user with this email already exists
-        existing_admin = User.query.filter_by(email=admin_email).first()
+        # Check if admin already exists using your model's built-in static method
+        existing_admin = User.get_by_email(admin_email)
+        
         if not existing_admin:
-            # Create the default admin
-            admin_user = User(
-                email=admin_email,
-                username='admin',
-                password=generate_password_hash(admin_password),
-                is_admin=True  # Ensure this matches your User model's admin column/field name
-            )
-            db.session.add(admin_user)
-            db.session.commit()
-    except Exception:
+            # 1. Instantiate with only name and email (as required by your __init__)
+            admin_user = User(name=admin_name, email=admin_email)
+            
+            # 2. Use your model's built-in helper to hash and set the password
+            admin_user.set_password(admin_password)
+            
+            # 3. Set admin flag
+            admin_user.is_admin = True
+            
+            # 4. Save to database
+            admin_user.save()
+            print(f"--> Default admin user created successfully: {admin_email}")
+    except Exception as e:
         db.session.rollback()
+        print(f"--> FAILED TO SEED ADMIN: {e}")
 
 def create_app(settings_module):
     app = Flask(__name__, instance_relative_config=True)
@@ -607,11 +611,7 @@ def create_app(settings_module):
         except Exception:
             # Fallback if database is not migrated yet
             return dict(texts={})
-
-    with app.app_context():
-        auto_seed_site_content()
-
-        # Update this block at the end of create_app()
+        
     with app.app_context():
         auto_seed_site_content()
         auto_seed_admin_user()  # <-- ADD THIS LINE
