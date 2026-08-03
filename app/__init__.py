@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_wtf.csrf import CSRFProtect
+from logging.handlers import SMTPHandler
 import logging
 
 login_manager = LoginManager()
@@ -619,7 +620,22 @@ def configure_logging(app):
         console_handler.setLevel(logging.INFO)
         handlers.append(console_handler)
 
-        mail_handler = SMTPHandler((app.config['MAIL_SERVER'], app.config['MAIL_PORT']), app.config['DONT_REPLY_FROM_EMAIL'], app.config['ADMINS'], '[Error]{} La aplicación falló'.format(app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD']), ())
+        mail_user = app.config.get('MAIL_USERNAME')
+        mail_pass = app.config.get('MAIL_PASSWORD')
+        if mail_user and mail_pass:
+            smtp_credentials = (mail_user, mail_pass)
+        else:
+            smtp_credentials = None
+
+        if app.config.get('MAIL_USE_TLS'):
+             smtp_secure = ()
+
+        try:
+           mail_port = int(app.config.get('MAIL_PORT', 587))
+        except (ValueError, TypeError):
+           mail_port = 587
+
+        mail_handler = SMTPHandler(mailhost=(app.config.get('MAIL_SERVER'), mail_port), fromaddr=app.config.get('DONT_REPLY_FROM_EMAIL', 'no-reply@example.com'), toaddrs=app.config.get('ADMINS', []), subject='[Error] Application Failed', credentials=smtp_credentials, secure=smtp_secure)
         mail_handler.setLevel(logging.ERROR)
         mail_handler.setFormatter(mail_handler_formatter())
         handlers.append(mail_handler)
