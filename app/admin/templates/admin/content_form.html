@@ -1,7 +1,7 @@
 {% extends "base_template.html" %}
 
 {% block title %}
-    {% if item %}Edit Content{% else %}New Content{% endif %}
+    Edit Content
 {% endblock %}
 
 {% block content %}
@@ -16,7 +16,7 @@
     document.querySelectorAll('textarea').forEach(textarea => {
       const editorDiv = document.createElement('div');
       editorDiv.className = 'quill-editor-container';
-      editorDiv.style.minHeight = '150px';
+      editorDiv.style.minHeight = '180px';
       editorDiv.style.background = '#ffffff';
       
       textarea.parentNode.insertBefore(editorDiv, textarea);
@@ -42,52 +42,38 @@
   });
 </script>
 
-
-<div class="form-container">
-    <h2>{% if item %}Edit Text Block{% else %}Create Text Block{% endif %}</h2>
-    <hr>
+<div class="form-container" style="max-width: 800px; margin: 40px auto; padding: 30px; background: #fff; border-radius: 12px; border: 1px solid #e2e8f0;">
+    <h2>Edit Text Block</h2>
+    <hr style="margin-bottom: 24px; border: 0; border-top: 1px solid #e2e8f0;">
 
     <form method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         {{ form.hidden_tag() }}
 
-       <div class="form-group">
-            {{ form.key.label }}<br>
-            <small style="color: #666;">(e.g., hero_title, services_subtitle)</small>
-            {{ form.key(class="form-control") }}
+        <!-- System Key (Read Only) -->
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label style="font-weight: 600; color: #1e293b;">System Key</label><br>
+            <input type="text" value="{{ item.key }}" class="form-control" readonly disabled style="background-color: #f1f5f9; cursor: not-allowed;">
+            <input type="hidden" name="key" value="{{ item.key }}">
         </div>
 
-        <div class="form-group">
-            {{ form.description.label }}<br>
+        <!-- Description -->
+        <div class="form-group" style="margin-bottom: 20px;">
+            {{ form.description.label(style="font-weight: 600; color: #1e293b;") }}<br>
             {{ form.description(class="form-control") }}
         </div>
 
-        <div class="form-group">
-            {{ form.content.label }}<br>
+        <!-- Content (Quill Editor) -->
+        <div class="form-group" style="margin-bottom: 24px;">
+            {{ form.content.label(style="font-weight: 600; color: #1e293b;") }}<br>
             {{ form.content(rows=8, class="form-control") }}
         </div>
-        
-        <div class="form-group">
-            {{ form.key.label }}<br>
-            {% if item %}
-                <input type="text" value="{{ item.key }}" class="form-control" readonly disabled>
-                <input type="hidden" name="key" value="{{ item.key }}">
-            {% else %}
-              {{ form.key(class="form-control") }}
-            {% endif %}
-        </div>
 
-        <div class="form-actions" style="margin-top: 20px;">
-            {{ form.submit(class="btn btn-primary") }}
+        <!-- Form Actions -->
+        <div class="form-actions" style="margin-top: 24px; display: flex; gap: 12px;">
+            {{ form.submit(class="btn btn-primary", value="Save Changes") }}
             <a href="{{ url_for('admin.list_content') }}" class="btn btn-outline">Cancel</a>
         </div>
     </form>
-
-    {% if item %}
-    <hr style="margin: 30px 0;">
-    <form action="{{ url_for('admin.delete_content', item_id=item.id) }}" method="post">
-        <input type="submit" value="Delete Content Block" class="btn btn-danger" onclick="return confirm('Are you sure?');">
-    </form>
-    {% endif %}
 </div>
 {% endblock %}

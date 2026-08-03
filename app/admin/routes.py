@@ -201,10 +201,40 @@ def delete_post(post_id):
 @login_required
 @admin_required
 def list_content():
-    """Muestra todos los textos dinámicos de la página"""
+    """Muestra todos los textos dinámicos de la página organizados por sección"""
     items = SiteContent.get_all()
-    return render_template("admin/content_list.html", items=items)
 
+    SECTION_ORDER = ["Title", "Services", "Why", "Contacts", "Footer", "Insights", "General"]
+
+    def get_section_category(item):
+        key = getattr(item, 'key', '').lower()
+        sec = (getattr(item, 'section', '') or '').lower()
+        combined = f"{key} {sec}"
+
+        if any(w in combined for w in ['title', 'hero', 'header', 'home']):
+            return "Title"
+        elif any(w in combined for w in ['service', 'services', 'offering']):
+            return "Services"
+        elif any(w in combined for w in ['why', 'about', 'choose', 'value', 'mission', 'reason']):
+            return "Why"
+        elif any(w in combined for w in ['contact', 'email', 'phone', 'address', 'form', 'touch']):
+            return "Contacts"
+        elif any(w in combined for w in ['footer', 'legal', 'terms', 'privacy', 'cookie', 'copyright']):
+            return "Footer"
+        elif any(w in combined for w in ['insight', 'insights', 'blog', 'article', 'news']):
+            return "Insights"
+        else:
+            return "General"
+
+    for item in items:
+        setattr(item, 'display_section', get_section_category(item))
+
+    items.sort(key=lambda x: (
+        SECTION_ORDER.index(x.display_section) if x.display_section in SECTION_ORDER else 99,
+        getattr(x, 'key', '')
+    ))
+
+    return render_template("admin/content_list.html", items=items)
 @admin_bp.route("/admin/content/new/", methods=['GET', 'POST'])
 @login_required
 @admin_required
