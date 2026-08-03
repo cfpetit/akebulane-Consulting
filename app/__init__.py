@@ -5,10 +5,6 @@ from flask_migrate import Migrate
 from flask_mail import Mail
 from flask_wtf.csrf import CSRFProtect
 from logging.handlers import SMTPHandler
-import os
-from werkzeug.security import generate_password_hash
-from app.auth.models import User
-from app import db
 import logging
 
 login_manager = LoginManager()
@@ -542,7 +538,11 @@ def auto_seed_site_content():
 
 def auto_seed_admin_user():
     """Auto-populates an initial admin user on server startup if it does not exist."""
-    
+    import os
+    from werkzeug.security import generate_password_hash
+    from app.auth.models import User
+    from app import db
+
     # Pull credentials from Render environment variables, or fallback to these defaults:
     admin_email = os.getenv('DEFAULT_ADMIN_EMAIL', 'admin@akebulanconsulting.com')
     admin_password = os.getenv('DEFAULT_ADMIN_PASSWORD', 'AdminPass2026!')
