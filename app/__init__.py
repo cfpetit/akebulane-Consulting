@@ -615,7 +615,7 @@ def configure_logging(app):
 
     app_env = app.config.get('APP_ENV', 'production')
     env_local = app.config.get('APP_ENV_LOCAL', 'local')
-    env_testing = app.config.get('APP_ENV_TESTING'. 'testing')
+    env_testing = app.config.get('APP_ENV_TESTING', 'testing')
     env_dev = app.config.get('APP_ENV_DEVELOPMENT', 'development')
     env_prod = app.config.get('APP_ENV_PRODUCTION', 'production')
 
