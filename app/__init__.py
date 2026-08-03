@@ -631,7 +631,16 @@ def configure_logging(app):
         from_email = app.config.get('DONT_REPLY_FROM_EMAIL')
         admins = app.config.get('ADMINS')
         if mail_server and mail_port and from_email and admins:
-            mail_handler = SMTPHandler(mail_server, mail_port), from_email, admins, '[Error] La aplicación falló', credentials=(app.config.get('MAIL_USERNAME'), app.config.get('MAIL_PASSWORD')) if app.config.get('MAIL_USERNAME') else None)
+            mail_handler = SMTPHandler(
+                (mail_server, mail_port),
+                from_email,
+                admins,
+                '[Error] La aplicación falló',
+                credentials=(
+                  app.config.get('MAIL_USERNAME'),
+                  app.config.get('MAIL_PASSWORD')
+                ) if app.config.get('MAIL_USERNAME') else None
+        )
 
         mail_handler.setLevel(logging.ERROR)
         mail_handler.setFormatter(mail_handler_formatter())
